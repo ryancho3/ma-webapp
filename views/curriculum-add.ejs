@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <title>Matchbook Foundation: Curriculum List</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%- include('section/header'); %>
+
+      <%- include('section/menu'); %>
+
+      <div id="page">
+        <h2>Add New Curriculum</h2>
+        <form action="/curriculum-post" method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" name="description" placeholder="Description">
+          </div>
+          <div class="form-submit">
+            <input type="submit" value="Create">
+          </div>
+        </form>
+      </div>
+
+      <%- include('section/footer'); %>
+
+    </div>
+
+    <!-- Static -->
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>

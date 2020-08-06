@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <title>Matchbook Foundation: Curriculum List</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%- include('section/header'); %>
+
+      <%- include('section/menu'); %>
+
+      <div id="page">
+        <h2>Curriculum List</h2>
+          <ul>
+            <% for(var i=0; i<curriculum_list.length; i++) { %>
+              <li><a href="/curriculum-view?curriculum_id=<%= curriculum_list[i].curriculum_id %>"><%= curriculum_list[i].name %></a></li>
+            <% } %>
+          </ul>
+      </div>
+
+      <a href="/curriculum-add">Add New Curriculum</a>
+
+      <%- include('section/footer'); %>
+
+    </div>
+
+    <!-- Static -->
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <title>Matchbook Foundation: Curriculum</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%- include('section/header'); %>
+
+      <%- include('section/menu'); %>
+
+      <div id="page">
+        <h2>Curriculum</h2>
+        <div>
+            <strong>Name: </strong>
+            <span><%= curriculum_obj['name'] %></span>
+        </div>
+        <div>
+            <strong>Description: </strong>
+            <span><%= curriculum_obj['description'] %></span>
+        </div>
+      </div>
+
+      <%- include('section/footer'); %>
+
+    </div>
+
+    <!-- Static -->
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
