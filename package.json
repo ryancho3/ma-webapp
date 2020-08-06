@@ -10,6 +10,7 @@
     "uuid": "latest"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "archive": "zip mf-webapp.zip -r * .[^.]*"
   }
 }
