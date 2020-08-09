@@ -17,6 +17,7 @@ module.exports = function(req, res) {
         }
 
         res.render('curriculum-post', {
+            'session_user': req.session_user,
             'curriculum_obj': output.curriculum_obj,
         });
         return;

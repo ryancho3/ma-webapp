@@ -13,6 +13,7 @@ module.exports = function(req, res) {
         }
 
         res.render('curriculum-list', {
+            'session_user': req.session_user,
             'curriculum_list': output.curriculum_list,
         });
     });

@@ -14,6 +14,7 @@ function UserService () {
 
 UserService.prototype.createUser = function(input, callback) {
 
+    var inputType = input.type;
     var inputPassword = input.password;
     var inputEmail = input.email;
 
@@ -22,7 +23,7 @@ UserService.prototype.createUser = function(input, callback) {
 
     var ddbItem = {
         'user_id': {'S': uuidv4()},
-        'user_type': {'S': "STUDENT"},
+        'user_type': {'S': inputType},
         'email_lowercase': {'S': email_lowercase},
         'password_sha256': {'S': password_sha256},
         'name': {'S': input.name},

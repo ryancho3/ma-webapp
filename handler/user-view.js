@@ -16,6 +16,7 @@ module.exports = function(req, res) {
         }
 
         res.render('user-view', {
+            'session_user': req.session_user,
             'user_obj': output.user_obj,
         });
     });

@@ -2,6 +2,7 @@
 // DEPENDENCY
 var curriculumService = require('../service/curriculum.js');
 
+// HANDLER
 module.exports = function(req, res) {
 
     var input = {};
@@ -15,6 +16,7 @@ module.exports = function(req, res) {
         }
 
         res.render('curriculum-view', {
+            'session_user': req.session_user,
             'curriculum_obj': output.curriculum_obj,
         });
     });

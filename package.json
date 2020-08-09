@@ -8,7 +8,8 @@
     "express": "latest",
     "body-parser": "latest",
     "uuid": "latest",
-    "crypto": "latest"
+    "crypto": "latest",
+    "cookie-parser": "latest"
   },
   "scripts": {
     "start": "node app.js",

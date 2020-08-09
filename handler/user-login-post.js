@@ -2,6 +2,7 @@
 // DEPENDENCY
 var crypto = require('crypto');
 var userService = require('../service/user.js');
+var sessionService = require('../service/session.js');
 
 // HANDLER
 module.exports = function(req, res) {
@@ -36,12 +37,42 @@ module.exports = function(req, res) {
         }
 
         // TODO: check password match
-        console.log(output.user_obj);
+        //console.log(output.user_obj);
 
-        res.render('user-login-success', {
-            'user_obj': output.user_obj,
+        var user_obj = output.user_obj;
+
+        sessionService.createSession({
+            'user_id': user_obj.user_id,
+
+        }, function(err, output) {
+
+            if (err) {
+                res.render('500', {
+                    err: err
+                })
+                return;
+            }
+
+            var session_obj = output.session_obj;
+
+            if (session_obj) {
+                var session_id = session_obj.session_id;
+                res.cookie('session_id', session_id);
+                req.session_user = {
+                    'session_id': session_id,
+                    'user_id': user_obj.user_id,
+                    'user_type': user_obj.user_type,
+                    'name': user_obj.name,
+                    'email': user_obj.email_lowercase,
+                }
+            }
+
+            res.render('user-login-success', {
+                'session_user': req.session_user,
+                'session_obj': session_obj
+            });
+            return;
         });
-        return;
     });
 }
 

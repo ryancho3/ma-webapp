@@ -1,6 +1,15 @@
-<div class="user">
+
+<div id="menu">
     <a href="/home">Home</a>
     <a href="/curriculum-list">Curriculums</a>
-    <a href="/user-login">Login</a>
-    <a href="/user-register">Register</a>
+</div>
+
+<div id="user_menu">
+    <% if (typeof session_user != "undefined" && session_user) { %>
+        <span>Hello, <%= session_user.name %> (<%= session_user.user_type %>)</span>
+        <a href="/user-logout">Logout</a>
+    <% } else { %>
+        <a href="/user-login">Login</a>
+        <a href="/user-register">Register</a>
+    <% } %>
 </div>
