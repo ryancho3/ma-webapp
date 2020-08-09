@@ -1,3 +1,6 @@
+.DS_STORE
+
 # Dependency directories
 node_modules/
 mf-webapp.zip
+*.zip
