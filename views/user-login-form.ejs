@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <title>Matchbook Foundation: Curriculum List</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%- include('section/header'); %>
+
+      <%- include('section/menu'); %>
+
+      <div id="page">
+        <h2>User Login</h2>
+        <form action="/user-login-post" method="post">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" name="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="description">Password</label>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+          <div class="form-submit">
+            <input type="submit" value="Login">
+          </div>
+        </form>
+      </div>
+
+      <%- include('section/footer'); %>
+
+    </div>
+
+    <!-- Static -->
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
+

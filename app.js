@@ -30,6 +30,11 @@ if (cluster.isMaster) {
     var bodyParser = require('body-parser');
 
     var home_handler = require('./handler/home.js');
+    var user_view_handler = require('./handler/user-view.js');
+    var user_login_handler = require('./handler/user-login.js');
+    var user_login_post_handler = require('./handler/user-login-post.js');
+    var user_register_handler = require('./handler/user-register.js');
+    var user_register_post_handler = require('./handler/user-register-post.js');
     var curriculum_view_handler = require('./handler/curriculum-view.js');
     var curriculum_list_handler = require('./handler/curriculum-list.js');
     var curriculum_add_handler = require('./handler/curriculum-add.js');
@@ -45,6 +50,12 @@ if (cluster.isMaster) {
 
     app.get('/', home_handler);
     app.get('/home', home_handler);
+
+    app.get('/user-view', user_view_handler);
+    app.get('/user-login', user_login_handler);
+    app.post('/user-login-post', user_login_post_handler);
+    app.get('/user-register', user_register_handler);
+    app.post('/user-register-post', user_register_post_handler);
 
     app.get('/curriculum-view', curriculum_view_handler);
     app.get('/curriculum-list', curriculum_list_handler);
