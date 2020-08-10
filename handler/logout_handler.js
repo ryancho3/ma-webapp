@@ -1,16 +1,21 @@
 
 // DEPENDENCY
-var sessionService = require('../service/session.js');
-const userService = require('../service/user.js');
+var sessionService = require('../service/session_service.js');
+const userService = require('../service/user_service.js');
 
 // HANDLER
 module.exports = function(req, res) {
 
     var userSession = req.user_session;
 
+    // Clear cookie first, even if there are errors in later part
+    res.clearCookie('session_id');
+
     // Session not found => just show logout success
     if (!userSession || userSession.session_id) {
-        return res.render('user-logout-success', {
+
+
+        return res.render('logout_success_page', {
         });
     }
 
@@ -20,12 +25,12 @@ module.exports = function(req, res) {
     }, function(err, output) {
 
         if (err) {
-            return res.render('500', {
+            return res.render('error_page', {
                 err: err
             })
         }
 
-        return res.render('user-logout-success', {
+        return res.render('logout_success_page', {
         });
     });
 }

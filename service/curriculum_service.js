@@ -1,7 +1,7 @@
 
 // DEPENDENCY
-const { v4: uuidv4 } = require('uuid');
-var dynamodb = require("../client/dynamodb.js");
+var dynamodb = require('../client/dynamodb.js');
+var curriculumUtil = require('../util/curriculum_util.js');
 
 // CLASS
 function CurriculumService () {
@@ -12,28 +12,19 @@ function CurriculumService () {
 
 CurriculumService.prototype.createCurriculum = function(input, callback) {
 
-    var ddbItem = {
-        'curriculum_id': {'S': uuidv4()},
-        'name': {'S': input.name},
-        'description': {'S': input.description}
-    };
-
-    this.ddbClient.putItem({
+    var ddbItem = curriculumUtil.newDynamodbItemFromInput(input);
+    var ddbParams = {
         'TableName': this.ddbTable,
         'Item': ddbItem
+    }
 
-    }, function(err, data) {
+    this.ddbClient.putItem(ddbParams, function(err, data) {
 
         if (err) {
-            callback(err);
-            return;
+            return callback(err);
         }
 
-        var curriculum_obj = {
-            'curriculum_id': ddbItem.curriculum_id['S'],
-            'name': ddbItem.name['S'],
-            'description': ddbItem.description['S'],
-        };
+        var curriculum_obj = curriculumUtil.mapDynamodbItemToCurriculumObj(ddbItem);
 
         return callback(null, {
             'curriculum_obj': curriculum_obj
@@ -53,18 +44,12 @@ CurriculumService.prototype.loadCurriculum = function(input, callback) {
             return callback(err);
         }
 
-        var ddbItem = data.Item;
-        var curriculum_obj = {
-            'curriculum_id': ddbItem.curriculum_id['S'],
-            'name': ddbItem.name['S'],
-            'description': ddbItem.description['S'],
-        };
+        var curriculum_obj = curriculumUtil.mapDynamodbItemToCurriculumObj(data.Item);
 
         return callback(null, {
             'curriculum_obj': curriculum_obj,
         });
     });
-
 }
 
 CurriculumService.prototype.listCurriculum = function(callback) {
@@ -81,13 +66,7 @@ CurriculumService.prototype.listCurriculum = function(callback) {
         var curriculum_list = [];
 
         data.Items.forEach(function(ddbItem){
-
-            var curriculum_obj = {
-                'curriculum_id': ddbItem.curriculum_id['S'],
-                'name': ddbItem.name['S'],
-                'description': ddbItem.description['S'],
-            };
-
+            var curriculum_obj = curriculumUtil.mapDynamodbItemToCurriculumObj(ddbItem);
             curriculum_list.push(curriculum_obj);
         });
 
@@ -98,6 +77,5 @@ CurriculumService.prototype.listCurriculum = function(callback) {
 }
 
 // EXPORT
-
 var curriculumService = new CurriculumService();
 module.exports = curriculumService;

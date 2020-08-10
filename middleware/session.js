@@ -1,7 +1,7 @@
 
 // DEPENDENCY
-var userService = require('../service/user.js');
-var sessionService = require('../service/session.js');
+var userService = require('../service/user_service.js');
+var sessionService = require('../service/session_service.js');
 
 module.exports = function(req, res, next) {
 

@@ -30,19 +30,19 @@ if (cluster.isMaster) {
     var bodyParser = require('body-parser');
     var cookieParser = require('cookie-parser')
 
-    var middleware_session = require('./middleware/session.js');
+    var sessionMiddleware = require('./middleware/session.js');
 
-    var home_handler = require('./handler/home.js');
-    var user_view_handler = require('./handler/user-view.js');
-    var user_login_handler = require('./handler/user-login.js');
-    var user_login_post_handler = require('./handler/user-login-post.js');
-    var user_logout_handler = require('./handler/user-logout.js');
-    var user_register_handler = require('./handler/user-register.js');
-    var user_register_post_handler = require('./handler/user-register-post.js');
-    var curriculum_view_handler = require('./handler/curriculum-view.js');
-    var curriculum_list_handler = require('./handler/curriculum-list.js');
-    var curriculum_add_handler = require('./handler/curriculum-add.js');
-    var curriculum_post_handler = require('./handler/curriculum-post.js');
+    var homePageHandler             = require('./handler/home_page_handler.js');
+    var userPageHandler             = require('./handler/user_page_handler.js');
+    var loginPageHandler            = require('./handler/login_page_handler.js');
+    var loginPostHandler            = require('./handler/login_post_handler.js');
+    var logoutHandler               = require('./handler/logout_handler.js');
+    var registerPageHandler         = require('./handler/register_page_handler.js');
+    var registerPostHandler         = require('./handler/register_post_handler.js');
+    var curriculumPageHandler       = require('./handler/curriculum_page_handler.js');
+    var curriculumListPageHandler   = require('./handler/curriculum_list_page_handler.js');
+    var curriculumCreatePageHandler = require('./handler/curriculum_create_page_handler.js');
+    var curriculumCreatePostHandler = require('./handler/curriculum_create_post_handler.js');
 
     //-- APP SETUP --//
 
@@ -52,22 +52,21 @@ if (cluster.isMaster) {
     app.use('/static', express.static('static'))
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended:false}));
-    app.use(middleware_session);
+    app.use(sessionMiddleware);
 
-    app.get('/', home_handler);
-    app.get('/home', home_handler);
+    //-- APP HANDLERS --//
 
-    app.get('/user-view', user_view_handler);
-    app.get('/user-login', user_login_handler);
-    app.post('/user-login-post', user_login_post_handler);
-    app.get('/user-logout', user_logout_handler);
-    app.get('/user-register', user_register_handler);
-    app.post('/user-register-post', user_register_post_handler);
-
-    app.get('/curriculum-view', curriculum_view_handler);
-    app.get('/curriculum-list', curriculum_list_handler);
-    app.get('/curriculum-add', curriculum_add_handler);
-    app.post('/curriculum-post', curriculum_post_handler);
+    app.get ('/', homePageHandler);
+    app.get ('/user', userPageHandler);
+    app.get ('/login', loginPageHandler);
+    app.post('/login', loginPostHandler);
+    app.get ('/logout', logoutHandler);
+    app.get ('/register', registerPageHandler);
+    app.post('/register', registerPostHandler);
+    app.get ('/curriculum-view', curriculumPageHandler);
+    app.get ('/curriculum-list', curriculumListPageHandler);
+    app.get ('/curriculum-create', curriculumCreatePageHandler);
+    app.post('/curriculum-create', curriculumCreatePostHandler);
 
     //-- APP START --//
 

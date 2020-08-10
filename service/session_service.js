@@ -1,7 +1,7 @@
 
 // DEPENDENCY
-const { v4: uuidv4 } = require('uuid');
 var dynamodb = require("../client/dynamodb.js");
+var sessionUtil = require('../util/session_util.js');
 
 // CLASS
 function SessionService () {
@@ -12,31 +12,22 @@ function SessionService () {
 
 SessionService.prototype.createSession = function(input, callback) {
 
-    var inputUserId = input.user_id;
-
-    var ddbItem = {
-        'session_id': {'S': uuidv4()},
-        'user_id': {'S': inputUserId}
-    };
-
-    this.ddbClient.putItem({
+    var ddbItem = sessionUtil.newDynamodbItemFromInput(input);
+    var ddbParams = {
         'TableName': this.ddbSessionTable,
         'Item': ddbItem
+    };
 
-    }, function(err, data) {
+    this.ddbClient.putItem(ddbParams, function(err, data) {
 
         if (err) {
-            callback(err);
-            return;
+            return callback(err);
         }
 
-        var session_obj = {
-            'session_id': ddbItem.session_id['S'],
-            'user_id': ddbItem.user_id['S']
-        };
+        var sessionObj = sessionUtil.mapDynamodbItemToSessionObj(ddbItem);
 
         return callback(null, {
-            'session_obj': session_obj
+            'session_obj': sessionObj
         });
     });
 }
@@ -62,15 +53,10 @@ SessionService.prototype.loadSession = function(input, callback) {
         }
 
         // Session found
-        var ddbItem = data.Item;
-
-        var session_obj = {
-            'session_id': ddbItem.session_id['S'],
-            'user_id': ddbItem.user_id['S']
-        };
+        var sessionObj = sessionUtil.mapDynamodbItemToSessionObj(data.Item);
 
         return callback(null, {
-            'session_obj': session_obj
+            'session_obj': sessionObj
         });
     });
 }

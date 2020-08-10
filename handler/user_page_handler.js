@@ -1,6 +1,6 @@
 
 // DEPENDENCY
-var userService = require('../service/user.js');
+var userService = require('../service/user_service.js');
 
 // HANDLER
 module.exports = function(req, res) {
@@ -11,11 +11,11 @@ module.exports = function(req, res) {
     userService.loadUser(input, function(err, output) {
 
         if (err) {
-            res.render('500', {});
+            res.render('error_page', {});
             return;
         }
 
-        res.render('user-view', {
+        res.render('user_page', {
             'session_user': req.session_user,
             'user_obj': output.user_obj,
         });

@@ -1,8 +1,7 @@
-var cookieparser = require('cookie-parser')
 
 module.exports = function(req, res) {
 
-    res.render('index', {
+    res.render('home_page', {
         'session_user': req.session_user,
     });
 }

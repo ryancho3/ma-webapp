@@ -1,6 +1,6 @@
 
 // DEPENDENCY
-var curriculumService = require('../service/curriculum.js');
+var curriculumService = require('../service/curriculum_service.js');
 
 // HANDLER
 module.exports = function(req, res) {
@@ -12,11 +12,11 @@ module.exports = function(req, res) {
     curriculumService.createCurriculum(input, function(err, output) {
 
         if (err) {
-            res.render('500', {});
+            res.render('error_page', {});
             return;
         }
 
-        res.render('curriculum-post', {
+        res.render('curriculum_create_success_page', {
             'session_user': req.session_user,
             'curriculum_obj': output.curriculum_obj,
         });

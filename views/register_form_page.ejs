@@ -17,8 +17,15 @@
       <%- include('section/menu'); %>
 
       <div id="page">
-        <h2>User Login</h2>
-        <form action="/user-login-post" method="post">
+        <h2>User Register</h2>
+        <form action="/register" method="post">
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select name="type">
+              <option value="STUDENT">Student</option>
+              <option value="TUTOR">Tutor</option>
+            </select>
+          </div>
           <div class="form-group">
             <label for="email">Email</label>
             <input type="text" name="email" placeholder="Email">
@@ -27,8 +34,20 @@
             <label for="description">Password</label>
             <input type="password" name="password" placeholder="Password">
           </div>
+          <div class="form-group">
+            <label for="description">Repeat Password</label>
+            <input type="password" name="repeat_password" placeholder="Repeat Password">
+          </div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="name">Profile</label>
+            <input type="text" name="profile" placeholder="Profile">
+          </div>
           <div class="form-submit">
-            <input type="submit" value="Login">
+            <input type="submit" value="Register">
           </div>
         </form>
       </div>
