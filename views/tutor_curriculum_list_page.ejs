@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <title>Matchbook Foundation: Curriculum List</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%- include('section/header'); %>
+
+      <%- include('section/menu'); %>
+
+      <div id="page">
+        <h2>Curriculum list</h2>
+        <ul>
+          <% for(var i=0; i < includeCurriculumObjList.length; i++) { %>
+          <li>
+            <span><%= includeCurriculumObjList[i]['name'] %></span>
+            <form action="/tutor-curriculum-remove-post" method="post">
+              <input type="hidden" name="curriculum_id" value="<%= includeCurriculumObjList[i]['curriculum_id'] %>" />
+              <input type="submit" value="Remove"/>
+            </form>
+          </li>
+          <% } %>
+        </ul>
+
+        <h2>All new curriculum</h2>
+        <form action="/tutor-curriculum-add-post" method="post">
+          <select name="curriculum_id">
+            <% for(var i=0; i < excludeCurriculumObjList.length; i++) { %>
+            <option value="<%= excludeCurriculumObjList[i]['curriculum_id'] %>"><%= excludeCurriculumObjList[i]['name'] %></option>
+            <% } %>
+          </select>
+          <input type="submit" value="Add">
+        </form>
+      </div>
+
+      <%- include('section/footer'); %>
+
+    </div>
+
+    <!-- Static -->
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
+

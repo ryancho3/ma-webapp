@@ -32,17 +32,20 @@ if (cluster.isMaster) {
 
     var sessionMiddleware = require('./middleware/session.js');
 
-    var homePageHandler             = require('./handler/home_page_handler.js');
-    var userPageHandler             = require('./handler/user_page_handler.js');
-    var loginPageHandler            = require('./handler/login_page_handler.js');
-    var loginPostHandler            = require('./handler/login_post_handler.js');
-    var logoutHandler               = require('./handler/logout_handler.js');
-    var registerPageHandler         = require('./handler/register_page_handler.js');
-    var registerPostHandler         = require('./handler/register_post_handler.js');
+    var homePageHandler = require('./handler/home_page_handler.js');
+    var userPageHandler = require('./handler/user_page_handler.js');
+    var loginPageHandler = require('./handler/login_page_handler.js');
+    var loginPostHandler = require('./handler/login_post_handler.js');
+    var logoutHandler    = require('./handler/logout_handler.js');
+    var registerPageHandler = require('./handler/register_page_handler.js');
+    var registerPostHandler = require('./handler/register_post_handler.js');
     var curriculumPageHandler       = require('./handler/curriculum_page_handler.js');
     var curriculumListPageHandler   = require('./handler/curriculum_list_page_handler.js');
     var curriculumCreatePageHandler = require('./handler/curriculum_create_page_handler.js');
     var curriculumCreatePostHandler = require('./handler/curriculum_create_post_handler.js');
+    var tutorCurriculumListPageHandler   = require('./handler/tutor_curriculum_list_page_handler.js');
+    var tutorCurriculumAddPostHandler    = require('./handler/tutor_curriculum_add_post_handler.js');
+    var tutorCurriculumRemovePostHandler = require('./handler/tutor_curriculum_remove_post_handler.js');
 
     //-- APP SETUP --//
 
@@ -63,10 +66,13 @@ if (cluster.isMaster) {
     app.get ('/logout', logoutHandler);
     app.get ('/register', registerPageHandler);
     app.post('/register', registerPostHandler);
-    app.get ('/curriculum-view', curriculumPageHandler);
-    app.get ('/curriculum-list', curriculumListPageHandler);
+    app.get ('/curriculum-view',   curriculumPageHandler);
+    app.get ('/curriculum-list',   curriculumListPageHandler);
     app.get ('/curriculum-create', curriculumCreatePageHandler);
     app.post('/curriculum-create', curriculumCreatePostHandler);
+    app.get ('/tutor-curriculum-list',        tutorCurriculumListPageHandler);
+    app.post('/tutor-curriculum-add-post',    tutorCurriculumAddPostHandler);
+    app.post('/tutor-curriculum-remove-post', tutorCurriculumRemovePostHandler);
 
     //-- APP START --//
 

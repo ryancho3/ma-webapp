@@ -70,7 +70,7 @@ SessionService.prototype.deleteSession = function(input, callback) {
         'Key': {'session_id': {'S': inputSessionId}}
     }
 
-    this.ddbClient.getItem(ddbParams, function(err, data) {
+    this.ddbClient.deleteItem(ddbParams, function(err, data) {
         return callback(err);
     });
 }

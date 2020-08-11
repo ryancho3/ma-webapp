@@ -8,6 +8,11 @@
     <% if (typeof session_user != "undefined" && session_user) { %>
         <span>Hello, <%= session_user.name %> (<%= session_user.user_type %>)</span>
         <a href="/logout">Logout</a>
+
+        <% if (session_user['user_type'] === 'TUTOR') { %>
+            <a href="/tutor-curriculum-list">my curriculums</a>
+        <% } %>
+
     <% } else { %>
         <a href="/login">Login</a>
         <a href="/register">Register</a>
