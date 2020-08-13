@@ -9,7 +9,9 @@
     "body-parser": "latest",
     "uuid": "latest",
     "crypto": "latest",
-    "cookie-parser": "latest"
+    "cookie-parser": "latest",
+    "async": "latest",
+    "dateformat": "latest"
   },
   "scripts": {
     "start": "node app.js",

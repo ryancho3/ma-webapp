@@ -46,6 +46,8 @@ if (cluster.isMaster) {
     var tutorCurriculumListPageHandler   = require('./handler/tutor_curriculum_list_page_handler.js');
     var tutorCurriculumAddPostHandler    = require('./handler/tutor_curriculum_add_post_handler.js');
     var tutorCurriculumRemovePostHandler = require('./handler/tutor_curriculum_remove_post_handler.js');
+    var tutorAvailabilityListPageHandler   = require('./handler/tutor_availability_list_page_handler.js');
+    var tutorAvailabilityUpdatePostHandler = require('./handler/tutor_availability_update_post_handler.js');
 
     //-- APP SETUP --//
 
@@ -73,6 +75,8 @@ if (cluster.isMaster) {
     app.get ('/tutor-curriculum-list',        tutorCurriculumListPageHandler);
     app.post('/tutor-curriculum-add-post',    tutorCurriculumAddPostHandler);
     app.post('/tutor-curriculum-remove-post', tutorCurriculumRemovePostHandler);
+    app.get ('/tutor-availability-list',        tutorAvailabilityListPageHandler);
+    app.post('/tutor-availability-update-post', tutorAvailabilityUpdatePostHandler);
 
     //-- APP START --//
 

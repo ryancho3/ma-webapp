@@ -2,6 +2,7 @@
 // DEPENDENCY
 const { v4: uuidv4 } = require('uuid');
 var crypto = require('crypto');
+var dateformat = require('dateformat');
 
 // Generates a new uuid
 function generateUUIDString() {
@@ -28,7 +29,19 @@ function parseSha256String(str) {
     return sha256String;
 }
 
+function parseYYYYMMDDIntFromDate(date) {
+    var yyyymmdd = dateformat(date, "yyyymmdd");
+    return parseInt(yyyymmdd);
+}
+
+function parseYYYYMMDDStringFromDate(date) {
+    var yyyymmdd = dateformat(date, "yyyymmdd");
+    return yyyymmdd;
+}
+
 // EXPORTS
 module.exports.generateUUIDString = generateUUIDString;
 module.exports.toLowercaseString = toLowercaseString;
 module.exports.parseSha256String = parseSha256String;
+module.exports.parseYYYYMMDDIntFromDate = parseYYYYMMDDIntFromDate;
+module.exports.parseYYYYMMDDStringFromDate = parseYYYYMMDDStringFromDate;

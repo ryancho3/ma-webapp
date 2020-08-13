@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <title>Matchbook Foundation: Curriculum List</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%- include('section/header'); %>
+
+      <%- include('section/menu'); %>
+
+      <div id="page">
+        <h2>Availability list (start:<%= weekStartYYYYMMDD %>, end:<%= weekEndYYYYMMDD %>) </h2>
+
+        <% for (var yyyymmdd=weekStartYYYYMMDD; yyyymmdd<=weekEndYYYYMMDD; yyyymmdd++) { %>
+
+          <% var availableHourList = dateToAvailableHourListMap[yyyymmdd];
+             if (!availableHourList) {
+              availableHourList = [];
+             }
+          %>
+
+          <div style="width:120px; float:left;">
+
+            <h3><%= yyyymmdd %></h3>
+
+            <form action="/tutor-availability-update-post" method="post">
+              <input type="hidden" name="yyyymmdd" value="<%= yyyymmdd %>"/>
+              <% for (var i=0; i<24; i++) { %>
+
+                <% if (availableHourList.includes(i)) { %>
+                  <input type="checkbox" name="hour" value="<%= i %>" checked>
+                <% } else { %>
+                  <input type="checkbox" name="hour" value="<%= i %>">
+                <% } %>
+
+                <label for="<%= i %>"><%= i %>:00 - <%= i+1 %>:00</label>
+                <br/>
+              <% } %>
+              <input type="submit" value="Update"/>
+            </form>
+          </div>
+
+        <% } %>
+
+        <div style="clear:both">&nbsp;</div>
+
+      </div>
+
+      <%- include('section/footer'); %>
+
+    </div>
+
+    <!-- Static -->
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
+
