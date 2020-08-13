@@ -1,18 +1,28 @@
 
 <div id="menu">
-    <a href="/">Home</a>
-    <a href="/curriculum-list">Curriculums</a>
+    <a href="/">HOME</a>
+    <a href="/curriculum-list">CURRICULUMS</a>
 </div>
 
 <div id="user_menu">
     <% if (typeof session_user != "undefined" && session_user) { %>
-        <span>Hello, <%= session_user.name %> (<%= session_user.user_type %>)</span>
-        <a href="/logout">Logout</a>
+        <span><%= session_user.name %> (<%= session_user.user_type %>)</span>
 
+        <span>[</span>
         <% if (session_user['user_type'] === 'TUTOR') { %>
-            <a href="/tutor-curriculum-list">my curriculums</a>
-            <a href="/tutor-availability-list">my availability</a>
+            <a href="/user">Profile</a>
+            <span> | </span>
+            <a href="/tutor-curriculum-list">Manage Curriculums</a>
+            <span> | </span>
+            <a href="/tutor-availability-list">Manage Availability</a>
+
+        <% } else { %>
+            <a href="/user">Profile</a>
         <% } %>
+
+        <span> | </span>
+        <a href="/logout">Logout</a>
+        <span>]</span>
 
     <% } else { %>
         <a href="/login">Login</a>

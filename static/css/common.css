@@ -1,2 +1,10 @@
-#page {margin-top:20px;}
-#footer {margin-top:80px;}
+
+/* Sections */
+#header {padding:2px 12px;}
+#page {margin-top:20px; padding:4px 12px;}
+#footer {padding:4px 12px; margin-top:80px;}
+
+/* Menu */
+#menu {background:#222; padding:8px 12px;}
+#menu a {font-size:18px; color:#fff; padding-right:12px;}
+#user_menu {background:#eee; padding:8px 12px;}
