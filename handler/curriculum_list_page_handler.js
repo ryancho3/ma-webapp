@@ -12,9 +12,18 @@ module.exports = function(req, res) {
             return;
         }
 
+        var curriculumItems = output['curriculumItems'];
+
+        // Sort Curriculum Items
+        curriculumItems.sort(function(a, b) {
+            var nameA = a['name'];
+            var nameB = b['name'];
+            return nameA.localeCompare(nameB);
+        })
+
         res.render('curriculum_list_page', {
             'session_user': req.session_user,
-            'curriculum_list': output.curriculum_list,
+            'curriculumItems': curriculumItems
         });
     });
 }

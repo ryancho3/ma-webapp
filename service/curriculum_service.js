@@ -63,15 +63,15 @@ CurriculumService.prototype.listCurriculum = function(callback) {
             return callback(err);
         }
 
-        var curriculum_list = [];
+        var curriculumItems = [];
 
         data.Items.forEach(function(ddbItem){
             var curriculum_obj = curriculumUtil.mapDynamodbItemToCurriculumObj(ddbItem);
-            curriculum_list.push(curriculum_obj);
+            curriculumItems.push(curriculum_obj);
         });
 
         return callback(null, {
-            'curriculum_list': curriculum_list
+            'curriculumItems': curriculumItems
         });
     });
 }
