@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <title>Matchbook Foundation: Curriculum List</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%- include('section/header'); %>
+
+      <%- include('section/menu'); %>
+
+      <div id="page">
+        <h2>Create New Appointment</h2>
+        <form action="/appointment-create" method="post">
+
+          <input type="hidden" name="curriculum_id" value="<%= curriculum_id %>"/>
+          <input type="hidden" name="yyyymmdd" value="<%= yyyymmdd %>"/>
+          <input type="hidden" name="hour" value="<%= hour %>"/>
+
+          <div class="form-group">
+            <label for="name">Name: <%= curriculum_info['name'] %> </label>
+          </div>
+          <div class="form-group">
+            <label for="description">Description: <%= curriculum_info['description'] %></label>
+          </div>
+          <div class="form-group">
+            <label for="description">Appointment Date: <%= appointment_date %></label>
+          </div>
+          <div class="form-group">
+            <label for="description">Appointment Time: <%= appointment_time %></label>
+          </div>
+          <div class="form-group">
+            <select name="tutor_user_id">
+              <% tutor_user_list.forEach(function(user) { %>
+              <option value="<%= user['user_id'] %>"><%= user['name'] %></option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="form-submit">
+            <input type="submit" value="Create">
+          </div>
+        </form>
+      </div>
+
+      <%- include('section/footer'); %>
+
+    </div>
+
+    <!-- Static -->
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
+

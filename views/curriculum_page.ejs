@@ -20,11 +20,28 @@
         <h2>Curriculum</h2>
         <div>
             <strong>Name: </strong>
-            <span><%= curriculum_obj['name'] %></span>
+            <span><%= curriculumInfo['name'] %></span>
         </div>
         <div>
             <strong>Description: </strong>
-            <span><%= curriculum_obj['description'] %></span>
+            <span><%= curriculumInfo['description'] %></span>
+        </div>
+        <div>
+          <strong>Availability (next 7 days)</strong>
+        </div>
+        <div>
+          <% Object.keys(curriculumAvailability).forEach(function(yyyymmdd){ %>
+              <span><%= yyyymmdd %> </span>
+              <% var hourList = curriculumAvailability[yyyymmdd]; %>
+            <ul>
+              <% hourList.forEach(function(hour) { %>
+                <li><a href="/appointment-create?curriculumId=<%= curriculumId %>&yyyymmdd=<%= yyyymmdd %>&hour=<%= hour %>"><%= yyyymmdd %> <%= hour %>:00</a></li>
+              <% }) %>
+            </ul>
+          <%
+            });
+          %>
+
         </div>
       </div>
 

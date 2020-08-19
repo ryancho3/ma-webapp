@@ -49,6 +49,9 @@ if (cluster.isMaster) {
     var tutorAvailabilityListPageHandler   = require('./handler/tutor_availability_list_page_handler.js');
     var tutorAvailabilityUpdatePostHandler = require('./handler/tutor_availability_update_post_handler.js');
 
+    var appointmentCreatePageHandler = require('./handler/appointment_create_page_handler.js');
+    var appointmentCreatePostHandler = require('./handler/appointment_create_post_handler.js');
+
     //-- APP SETUP --//
 
     var app = express();
@@ -77,6 +80,8 @@ if (cluster.isMaster) {
     app.post('/tutor-curriculum-remove-post', tutorCurriculumRemovePostHandler);
     app.get ('/tutor-availability-list',        tutorAvailabilityListPageHandler);
     app.post('/tutor-availability-update-post', tutorAvailabilityUpdatePostHandler);
+    app.get ('/appointment-create', appointmentCreatePageHandler);
+    app.post('/appointment-create', appointmentCreatePostHandler);
 
     //-- APP START --//
 

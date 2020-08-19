@@ -39,9 +39,44 @@ function parseYYYYMMDDStringFromDate(date) {
     return yyyymmdd;
 }
 
+function parseDateFromYYYYMMDD(yyyymmdd) {
+    
+    var yyyymmddString = "" + yyyymmdd; // force it to be string (in case it's a number)
+
+    // validate
+    if (yyyymmddString.length !== 8) {
+        return null;
+    }
+
+    var stringYYYY = str.substring(0, 4);
+    var stringMM = str.substring(4, 6);
+    var stringDD = str.substring(6, 8);
+
+    var intYYYY = parseInt(stringYYYY);
+    var intMM = parseInt(stringMM);
+    var intDD = parseInt(stringDD);
+
+    var date = new Date(intYYYY, (intMM - 1), intDD, 0, 0, 0, 0);
+    return date;
+}
+
+function parseYYYYMMDDHHStringFromYYYYMMDDAndHour(yyyymmdd, hour) {
+
+    var stringYYYYMMDD = "" + yyyymmdd;
+    var stringHH = "" + hour;
+
+    if (stringHH.length != 2) {
+        stringHH = "0" + stringHH;
+    }
+
+    return stringYYYYMMDD + "" + stringHH;
+}
+
 // EXPORTS
 module.exports.generateUUIDString = generateUUIDString;
 module.exports.toLowercaseString = toLowercaseString;
 module.exports.parseSha256String = parseSha256String;
 module.exports.parseYYYYMMDDIntFromDate = parseYYYYMMDDIntFromDate;
 module.exports.parseYYYYMMDDStringFromDate = parseYYYYMMDDStringFromDate;
+module.exports.parseDateFromYYYYMMDD = parseDateFromYYYYMMDD;
+module.exports.parseYYYYMMDDHHStringFromYYYYMMDDAndHour = parseYYYYMMDDHHStringFromYYYYMMDDAndHour;

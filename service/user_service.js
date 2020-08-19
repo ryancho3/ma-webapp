@@ -1,5 +1,6 @@
 
 // DEPENDENCY
+var async = require('async');
 var userUtil = require('../util/user_util.js');
 var dynamodb = require("../client/dynamodb.js");
 
@@ -54,6 +55,48 @@ UserService.prototype.loadUser = function(input, callback) {
             'user_obj': userObj
         });
     });
+}
+
+UserService.prototype.loadUserInBatch = function(input, callback) {
+
+    var inputUserIdList = input['userIdList'];
+
+    var ddbTable = this.ddbUserTable;
+
+    var ddbKeys = [];
+    inputUserIdList.forEach(function(userId) {
+        var ddbKey = {'user_id': {'S': userId}};
+        ddbKeys.push(ddbKey);
+    });
+
+    var ddbRequestItems = {};
+    ddbRequestItems[ddbTable] = {Keys: ddbKeys};
+
+    var ddbParams = {
+        RequestItems: ddbRequestItems
+    };
+
+    console.log(JSON.stringify(ddbParams))
+
+    this.ddbClient.batchGetItem(ddbParams, function(err, data) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        var ddbItems = data.Responses[ddbTable];
+
+        // Parse User Objects
+        var userObjList = [];
+        ddbItems.forEach(function(ddbItem) {
+            var userObj = userUtil.mapDynamodbItemToUserObj(ddbItem);
+            userObjList.push(userObj);
+        })
+
+        return callback(null, {
+            'userObjList': userObjList
+        });
+    })
 }
 
 UserService.prototype.loadUserByEmail = function(input, callback) {

@@ -42,6 +42,39 @@ TutorService.prototype.listCurriculumIdsForUser = function(input, callback) {
     });
 }
 
+TutorService.prototype.listTutorUserIdsForCurriculum = function(input, callback) {
+
+    var inputCurriculumId = input.curriculumId;
+
+    var ddbParams = {
+        'TableName': this.ddbTutorCurriculumTable,
+        'IndexName': this.ddbCurriculumIdIndex,
+        'KeyConditionExpression': "curriculum_id = :curriculum_id",
+        'ExpressionAttributeValues': {
+            ":curriculum_id": {'S': inputCurriculumId}
+        }
+    };
+
+    this.ddbClient.query(ddbParams, function(err, data) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        // Parse tutor userIds
+        var tutorUserIdList = [];
+        data.Items.forEach(function(ddbItem){
+            var tutorUserId = ddbItem.tutor_user_id.S;
+            tutorUserIdList.push(tutorUserId);
+        });
+
+        // Return success
+        return callback(null, {
+            'tutorUserIdList': tutorUserIdList
+        })
+    });
+}
+
 TutorService.prototype.addCurriculumForTutor = function(input, callback) {
 
     var ddbItem = _newDynamodbItem(
