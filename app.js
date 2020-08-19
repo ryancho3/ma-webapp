@@ -52,6 +52,7 @@ if (cluster.isMaster) {
     var appointmentListPageHandler   = require('./handler/appointment_list_page_handler.js');
     var appointmentCreatePageHandler = require('./handler/appointment_create_page_handler.js');
     var appointmentCreatePostHandler = require('./handler/appointment_create_post_handler.js');
+    var appointmentNotePostHandler   = require('./handler/appointment_note_post_handler.js');
 
     //-- APP SETUP --//
 
@@ -85,6 +86,7 @@ if (cluster.isMaster) {
     app.get ('/appointment-list'  , appointmentListPageHandler);
     app.get ('/appointment-create', appointmentCreatePageHandler);
     app.post('/appointment-create', appointmentCreatePostHandler);
+    app.post('/appointment-note'  , appointmentNotePostHandler);
 
     //-- APP START --//
 

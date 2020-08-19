@@ -130,6 +130,96 @@ AppointmentService.prototype.queryTutorAppointments = function(input, callback) 
     });
 }
 
+AppointmentService.prototype.updateAdminNote = function (input, callback) {
+
+    var inputAppointmentId = input['appointmentId'];
+    var inputNote = input['note'];
+
+    var ddbParams = {
+        TableName: this.ddbAppointmentTableName,
+        Key: {
+            'appointment_id': {S: inputAppointmentId}
+        },
+        UpdateExpression: 'SET admin_note = :note',
+        ExpressionAttributeValues: {
+            ':note': {S: inputNote}
+        },
+        ReturnValues: 'ALL_NEW'
+    }
+
+    this.ddbClient.updateItem(ddbParams, function(err, data) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        //var ddbItem = data.Attributes;
+        //console.log(ddbItem);
+
+        return callback();
+    })
+}
+
+AppointmentService.prototype.updateTutorNote = function (input, callback) {
+
+    var inputAppointmentId = input['appointmentId'];
+    var inputNote = input['note'];
+
+    var ddbParams = {
+        TableName: this.ddbAppointmentTableName,
+        Key: {
+            'appointment_id': {S: inputAppointmentId}
+        },
+        UpdateExpression: 'SET tutor_note = :note',
+        ExpressionAttributeValues: {
+            ':note': {S: inputNote}
+        },
+        ReturnValues: 'ALL_NEW'
+    }
+
+    this.ddbClient.updateItem(ddbParams, function(err, data) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        //var ddbItem = data.Attributes;
+        //console.log(ddbItem);
+
+        return callback();
+    })
+}
+
+AppointmentService.prototype.updateStudentNote = function (input, callback) {
+
+    var inputAppointmentId = input['appointmentId'];
+    var inputNote = input['note'];
+
+    var ddbParams = {
+        TableName: this.ddbAppointmentTableName,
+        Key: {
+            'appointment_id': {S: inputAppointmentId}
+        },
+        UpdateExpression: 'SET student_note = :note',
+        ExpressionAttributeValues: {
+            ':note': {S: inputNote}
+        },
+        ReturnValues: 'ALL_NEW'
+    }
+
+    this.ddbClient.updateItem(ddbParams, function(err, data) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        //var ddbItem = data.Attributes;
+        //console.log(ddbItem);
+
+        return callback();
+    })
+}
+
 // EXPORT
 var appointmentService = new AppointmentService();
 module.exports = appointmentService;

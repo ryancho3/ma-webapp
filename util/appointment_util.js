@@ -31,13 +31,25 @@ function mapDynamodbItemToAppointmentItem (dynamodbItem) {
     var studentUserId = dynamodbItem.student_user_id.S;
     var yyyymmddhh = dynamodbItem.yyyymmddhh.N;
 
-    return {
+    var appointmentItem = {
         'appointmentId': appointmentId,
         'curriculumId': curriculumId,
         'tutorUserId': tutorUserId,
         'studentUserId': studentUserId,
         'yyyymmddhh': yyyymmddhh
     }
+
+    if (dynamodbItem.admin_note) {
+        appointmentItem['adminNote'] = dynamodbItem.admin_note.S;
+    }
+    if (dynamodbItem.tutor_note) {
+        appointmentItem['tutorNote'] = dynamodbItem.tutor_note.S;
+    }
+    if (dynamodbItem.student_note) {
+        appointmentItem['studentNote'] = dynamodbItem.student_note.S;
+    }
+
+    return appointmentItem;
 }
 
 // EXPORTS

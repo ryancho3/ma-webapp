@@ -106,6 +106,7 @@ module.exports = function(req, res) {
 
             return res.render('appointment_page', {
                 'session_user': req.session_user,
+                'appointmentId': inputAppointmentId,
                 'appointmentItem': result['appointmentItem'],
                 'curriculumItem': result['curriculumItem'],
                 'studentUserItem': result['studentUserItem'],

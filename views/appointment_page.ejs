@@ -38,7 +38,22 @@
             <li>Student Name: <%= studentUserItem['name'] %></li>
           </ul>
         </div>
+        <div>
+          <ul>
+            <li>Admin Note: <%= appointmentItem['adminNote'] %></li>
+          </ul>
+        </div>
       </div>
+
+      <% if (session_user['user_type'] == 'ADMIN') { %>
+      <div>
+        <form action="/appointment-note" method="post">
+          <input type="hidden" name="appointmentId" value="<%= appointmentId %>"/>
+          <input type="text" name="note"/>
+          <input type="submit" value="Update Note"/>
+        </form>
+      </div>
+      <% } %>
 
       <%- include('section/footer'); %>
 
