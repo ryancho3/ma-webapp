@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <title>Matchbook Foundation: Curriculum List</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%- include('section/header'); %>
+
+      <%- include('section/menu'); %>
+
+      <div id="page">
+        <h2>Appointment</h2>
+        <div>
+          <ul>
+            <li>Curriculum Name: <%= curriculumItem['name'] %></li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Curriculum Datetime: <%= appointmentItem['yyyymmddhh'] %></li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Tutor Name: <%= tutorUserItem['name'] %></li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>Student Name: <%= studentUserItem['name'] %></li>
+          </ul>
+        </div>
+      </div>
+
+      <%- include('section/footer'); %>
+
+    </div>
+
+    <!-- Static -->
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
+

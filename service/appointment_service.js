@@ -34,6 +34,32 @@ AppointmentService.prototype.createAppointment = function(input, callback) {
     });
 }
 
+AppointmentService.prototype.loadAppointment = function(input, callback) {
+
+    var ddbParams = {
+        'TableName': this.ddbAppointmentTableName,
+        'Key': {'appointment_id': {'S': input.appointmentId}}
+    }
+
+    this.ddbClient.getItem(ddbParams, function(err, data) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        // Not Found
+        if (!data.Item) {
+            return callback(null, {});
+        }
+
+        var appointmentItem = appointmentUtil.mapDynamodbItemToAppointmentItem(data.Item);
+
+        return callback(null, {
+            'appointmentItem': appointmentItem
+        });
+    });
+}
+
 // EXPORT
 var appointmentService = new AppointmentService();
 module.exports = appointmentService;
