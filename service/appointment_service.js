@@ -60,6 +60,76 @@ AppointmentService.prototype.loadAppointment = function(input, callback) {
     });
 }
 
+AppointmentService.prototype.queryStudentAppointments = function(input, callback) {
+
+    var inputStudentUserId = input['studentUserId'];
+    var inputStartYYYYMMDD = input['startYYYYMMDD'];
+
+    var startYYYYMMDDHH = inputStartYYYYMMDD + "00";
+
+    var ddbParams = {
+        'TableName': this.ddbAppointmentTableName,
+        'IndexName': this.ddbStudentIndexName,
+        'KeyConditionExpression': "student_user_id = :student_user_id AND :start_yyyymmddhh <= yyyymmddhh",
+        'ExpressionAttributeValues': {
+            ":student_user_id": {'S': inputStudentUserId},
+            ":start_yyyymmddhh": {'N': startYYYYMMDDHH}
+        }
+    }
+
+    this.ddbClient.query(ddbParams, function(err, data) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        var appointmentItemList = [];
+        data.Items.forEach(function(ddbItem) {
+            var appointmentItem = appointmentUtil.mapDynamodbItemToAppointmentItem(ddbItem);
+            appointmentItemList.push(appointmentItem);
+        });
+
+        return callback(null, {
+            'appointmentItemList': appointmentItemList
+        });
+    });
+}
+
+AppointmentService.prototype.queryTutorAppointments = function(input, callback) {
+
+    var inputTutorUserId = input['tutorUserId'];
+    var inputStartYYYYMMDD = input['startYYYYMMDD'];
+
+    var startYYYYMMDDHH = inputStartYYYYMMDD + "00";
+
+    var ddbParams = {
+        'TableName': this.ddbAppointmentTableName,
+        'IndexName': this.ddbTutorIndexName,
+        'KeyConditionExpression': "tutor_user_id = :tutor_user_id AND :start_yyyymmddhh <= yyyymmddhh",
+        'ExpressionAttributeValues': {
+            ":tutor_user_id": {'S': inputTutorUserId},
+            ":start_yyyymmddhh": {'N': startYYYYMMDDHH}
+        }
+    }
+
+    this.ddbClient.query(ddbParams, function(err, data) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        var appointmentItemList = [];
+        data.Items.forEach(function(ddbItem) {
+            var appointmentItem = appointmentUtil.mapDynamodbItemToAppointmentItem(ddbItem);
+            appointmentItemList.push(appointmentItem);
+        });
+
+        return callback(null, {
+            'appointmentItemList': appointmentItemList
+        });
+    });
+}
+
 // EXPORT
 var appointmentService = new AppointmentService();
 module.exports = appointmentService;

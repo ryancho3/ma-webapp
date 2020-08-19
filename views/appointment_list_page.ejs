@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <title>Matchbook Foundation: Curriculum List</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%- include('section/header'); %>
+
+      <%- include('section/menu'); %>
+
+      <div id="page">
+        <h2>Appointments</h2>
+        <% appointmentList.forEach(function(appointment) { %>
+
+          <ul>
+            <li><a href="/appointment-view?appointment_id=<%= appointment['appointmentId'] %>"><%= appointment['appointmentId'] %></a></li>
+            <li>Date time: <%= appointment['appointmentItem']['yyyymmddhh'] %> </li>
+            <li>Curriculum: <%= appointment['curriculumItem']['name'] %> </li>
+            <li>Student: <%= appointment['studentUserItem']['name'] %></li>
+            <li>Tutor: <%= appointment['tutorUserItem']['name'] %></li>
+          </ul>
+          
+        <% }) %>
+      </div>
+
+      <%- include('section/footer'); %>
+
+    </div>
+
+    <!-- Static -->
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
+

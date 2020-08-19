@@ -12,12 +12,16 @@
         <% if (session_user['user_type'] === 'TUTOR') { %>
             <a href="/user">Profile</a>
             <span> | </span>
+            <a href="/appointment-list">Appointments</a>
+            <span> | </span>
             <a href="/tutor-curriculum-list">Manage Curriculums</a>
             <span> | </span>
             <a href="/tutor-availability-list">Manage Availability</a>
 
         <% } else { %>
             <a href="/user">Profile</a>
+            <span> | </span>
+            <a href="/appointment-list">Appointments</a>
         <% } %>
 
         <span> | </span>
