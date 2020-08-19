@@ -19,8 +19,9 @@
       <div id="page">
         <h2>Curriculum List</h2>
           <ul>
-            <% for(var i=0; i<curriculumItems.length; i++) { %>
-              <li><a href="/curriculum-view?curriculum_id=<%= curriculumItems[i]['curriculum_id'] %>"><%= curriculumItems[i]['name'] %></a></li>
+            <% for(var i=0; i<curriculumModels.length; i++) { %>
+              <% var curriculumModel = curriculumModels[i]; %>
+              <li><a href="/curriculum-view?curriculum_id=<%= curriculumModel.getId() %>"><%= curriculumModel.getName() %></a></li>
             <% } %>
           </ul>
       </div>
