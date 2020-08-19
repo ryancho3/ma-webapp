@@ -60,6 +60,37 @@ AppointmentService.prototype.loadAppointment = function(input, callback) {
     });
 }
 
+AppointmentService.prototype.scanAppointments = function(input, callback) {
+
+    var inputStartYYYYMMDD = input['startYYYYMMDD'];
+    var startYYYYMMDDHH = inputStartYYYYMMDD + "00";
+
+    var ddbParams = {
+        'TableName': this.ddbAppointmentTableName,
+        'FilterExpression': ":start_yyyymmddhh <= yyyymmddhh",
+        'ExpressionAttributeValues': {
+            ":start_yyyymmddhh": {'N': startYYYYMMDDHH}
+        }
+    }
+
+    this.ddbClient.scan(ddbParams, function(err, data) {
+
+        if (err) {
+            return callback(err);
+        }
+
+        var appointmentItemList = [];
+        data.Items.forEach(function(ddbItem) {
+            var appointmentItem = appointmentUtil.mapDynamodbItemToAppointmentItem(ddbItem);
+            appointmentItemList.push(appointmentItem);
+        });
+
+        return callback(null, {
+            'appointmentItemList': appointmentItemList
+        });
+    });
+}
+
 AppointmentService.prototype.queryStudentAppointments = function(input, callback) {
 
     var inputStudentUserId = input['studentUserId'];
