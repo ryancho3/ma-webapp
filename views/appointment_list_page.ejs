@@ -20,13 +20,18 @@
         <h2>Appointments</h2>
         <% appointmentList.forEach(function(appointment) { %>
 
+          <% var appointmentItem = appointment['appointmentItem'] %>
+          <% var curriculumItem = appointment['curriculumItem'] %>
+          <% var tutorUserItem = appointment['tutorUserItem'] %>
+          <% var studentUserItem = appointment['studentUserItem'] %>
+
           <ul>
             <li><a href="/appointment-view?appointment_id=<%= appointment['appointmentId'] %>"><%= appointment['appointmentId'] %></a></li>
-            <li>Date time: <%= appointment['appointmentItem']['yyyymmddhh'] %> </li>
-            <li>Curriculum: <%= appointment['curriculumItem']['name'] %> </li>
-            <li>Student: <%= appointment['studentUserItem']['name'] %></li>
-            <li>Tutor: <%= appointment['tutorUserItem']['name'] %></li>
-            <li>Note: <%= appointment['appointmentItem']['adminNote'] %></li>
+            <li>Curriculum: <a href="/curriculum-view?curriculum_id=<%= curriculumItem['curriculum_id'] %>"><%= curriculumItem['name'] %></a></li>
+            <li>When: <%= appointmentItem['yyyymmddhh'] %></li>
+            <li>Tutor: <a href="/user?user_id=<%= tutorUserItem['user_id'] %>"><%= tutorUserItem['name'] %> (<%= tutorUserItem['email_lowercase'] %>)</a></li>
+            <li>Student: <a href="/user?user_id=<%= studentUserItem['user_id'] %>"><%= studentUserItem['name'] %> (<%= studentUserItem['email_lowercase'] %>)</a></li>
+            <li>Note: <%= appointmentItem['adminNote'] %></li>
           </ul>
           
         <% }) %>

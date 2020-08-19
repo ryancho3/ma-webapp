@@ -20,27 +20,11 @@
         <h2>Appointment</h2>
         <div>
           <ul>
-            <li>Curriculum Name: <%= curriculumItem['name'] %></li>
-          </ul>
-        </div>
-        <div>
-          <ul>
-            <li>Curriculum Datetime: <%= appointmentItem['yyyymmddhh'] %></li>
-          </ul>
-        </div>
-        <div>
-          <ul>
-            <li>Tutor Name: <%= tutorUserItem['name'] %></li>
-          </ul>
-        </div>
-        <div>
-          <ul>
-            <li>Student Name: <%= studentUserItem['name'] %></li>
-          </ul>
-        </div>
-        <div>
-          <ul>
-            <li>Admin Note: <%= appointmentItem['adminNote'] %></li>
+            <li>Curriculum: <a href="/curriculum-view?curriculum_id=<%= curriculumItem['curriculum_id'] %>"><%= curriculumItem['name'] %></a></li>
+            <li>When: <%= appointmentItem['yyyymmddhh'] %></li>
+            <li>Tutor: <a href="/user?user_id=<%= tutorUserItem['user_id'] %>"><%= tutorUserItem['name'] %> (<%= tutorUserItem['email_lowercase'] %>)</a></li>
+            <li>Student: <a href="/user?user_id=<%= studentUserItem['user_id'] %>"><%= studentUserItem['name'] %> (<%= studentUserItem['email_lowercase'] %>)</a></li>
+            <li>Note: <%= appointmentItem['adminNote'] %></li>
           </ul>
         </div>
       </div>
