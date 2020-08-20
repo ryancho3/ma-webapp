@@ -20,15 +20,16 @@
         <h2>Appointment</h2>
         <div>
           <ul>
-            <li>Curriculum: <a href="/curriculum-view?curriculum_id=<%= curriculumItem['curriculum_id'] %>"><%= curriculumItem['name'] %></a></li>
-            <li>When: <%= appointmentItem['yyyymmddhh'] %></li>
-            <li>Tutor: <a href="/user?user_id=<%= tutorUserItem['user_id'] %>"><%= tutorUserItem['name'] %> (<%= tutorUserItem['email_lowercase'] %>)</a></li>
-            <li>Student: <a href="/user?user_id=<%= studentUserItem['user_id'] %>"><%= studentUserItem['name'] %> (<%= studentUserItem['email_lowercase'] %>)</a></li>
-            <li>Note: <%= appointmentItem['adminNote'] %></li>
+            <li><a href="/appointment-view?appointment_id=<%= appointmentModel.getAppointmentId() %>"><%= appointmentModel.getAppointmentId() %></a></li>
+            <li>Curriculum: <a href="/curriculum-view?curriculum_id=<%= appointmentModel.getCurriculumId() %>"><%= appointmentModel.getCurriculumName() %></a></li>
+            <li>When: <%= appointmentModel.getAppointmentStartDateString() %> <%= appointmentModel.getAppointmentStartTimeString() %></li>
+            <li>Tutor: <a href="/user?user_id=<%= appointmentModel.getTutorUserId() %>"><%= appointmentModel.getTutorUserName() %> (<%= appointmentModel.getTutorUserEmail() %>)</a></li>
+            <li>Student: <a href="/user?user_id=<%= appointmentModel.getStudentUserId() %>"><%= appointmentModel.getStudentUserName() %> (<%= appointmentModel.getStudentUserEmail() %>)</a></li>
+            <li>Note: <%= appointmentModel.getAdminNote() %></li>
             <li>
               Actions: 
               <form action="/appointment-archive" method="post">
-                <input type="hidden" name="appointment_id" value="<%= appointmentId %>"/>
+                <input type="hidden" name="appointment_id" value="<%= appointmentModel.getAppointmentId() %>"/>
                 <% if (sessionModel.isUserAdmin()) { %>
                   <input type="hidden" name="note" value="admin archive"/>
                   <input type="submit" value="Archive"/>

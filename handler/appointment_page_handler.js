@@ -6,6 +6,7 @@ var appointmentService = require('../service/appointment_service.js');
 var curriculumService = require('../service/curriculum_service.js');
 var userService = require('../service/user_service.js');
 var curriculumAvailabilityAPI = require('../api/curriculum_availability_api.js');
+var AppointmentModel = require('../model/appointment_model.js');
 
 // HANDLER
 module.exports = function(req, res) {
@@ -104,9 +105,22 @@ module.exports = function(req, res) {
                 });
             }
 
+
+            var appointmentItem = result['appointmentItem'];
+            var curriculumItem = result['curriculumItem'];
+            var tutorUserItem = result['tutorUserItem'];
+            var studentUserItem = result['studentUserItem'];
+
+            var appointmentModel = new AppointmentModel();
+            appointmentModel.setAppointmentItem(appointmentItem);
+            appointmentModel.setCurriculumItem(curriculumItem);
+            appointmentModel.setTutorUserItem(tutorUserItem);
+            appointmentModel.setStudentUserItem(studentUserItem);
+
             return res.render('appointment_page', {
                 'sessionModel': req.sessionModel,
                 'appointmentId': inputAppointmentId,
+                'appointmentModel': appointmentModel,
                 'appointmentItem': result['appointmentItem'],
                 'curriculumItem': result['curriculumItem'],
                 'studentUserItem': result['studentUserItem'],

@@ -4,6 +4,7 @@ var async = require('async');
 var stringUtil = require('../util/string_util.js');
 var appointmentService = require('../service/appointment_service.js');
 var appointmentLoadAPI = require('../api/appointment_load_api.js');
+var AppointmentModel = require('../model/appointment_model.js');
 
 // HANDLER
 module.exports = function(req, res) {
@@ -37,9 +38,12 @@ module.exports = function(req, res) {
                 return yyyymmddhhA - yyyymmddhhB;
             });
 
+            var appointmentModels = mapAppointmentModelsFromAppointList(appointmentList);
+
             return res.render('appointment_list_page', {
                 'sessionModel': sessionModel,
-                'appointmentList': appointmentList
+                'appointmentList': appointmentList,
+                'appointmentModels': appointmentModels
             });
         })
 
@@ -60,9 +64,12 @@ module.exports = function(req, res) {
                 return yyyymmddhhA - yyyymmddhhB;
             });
 
+            var appointmentModels = mapAppointmentModelsFromAppointList(appointmentList);
+
             return res.render('appointment_list_page', {
                 'sessionModel': sessionModel,
-                'appointmentList': appointmentList
+                'appointmentList': appointmentList,
+                'appointmentModels': appointmentModels
             });
         })
 
@@ -83,12 +90,32 @@ module.exports = function(req, res) {
                 return yyyymmddhhA - yyyymmddhhB;
             });
 
+            var appointmentModels = mapAppointmentModelsFromAppointList(appointmentList);
+
             return res.render('appointment_list_page', {
                 'sessionModel': sessionModel,
-                'appointmentList': appointmentList
+                'appointmentList': appointmentList,
+                'appointmentModels': appointmentModels
             });
         })
     }
+}
+
+function mapAppointmentModelsFromAppointList (appointmentList) {
+
+    var appointmentModels = [];
+    appointmentList.forEach(function(appointment) {
+
+        var appointmentModel = new AppointmentModel();
+        appointmentModel.setAppointmentItem(appointment['appointmentItem']);
+        appointmentModel.setCurriculumItem(appointment['curriculumItem']);
+        appointmentModel.setTutorUserItem(appointment['tutorUserItem']);
+        appointmentModel.setStudentUserItem(appointment['studentUserItem']);
+
+        appointmentModels.push(appointmentModel);
+    })
+
+    return appointmentModels;
 }
 
 function loadUpcomingAppointments(startYYYYMMDD, callback) {
