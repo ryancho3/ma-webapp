@@ -30,6 +30,13 @@ module.exports = function(req, res) {
                 });
             }
 
+            // Sort Appointments
+            appointmentList.sort(function(a, b) {
+                var yyyymmddhhA = a['appointmentItem']['yyyymmddhh'];
+                var yyyymmddhhB = b['appointmentItem']['yyyymmddhh'];
+                return yyyymmddhhA - yyyymmddhhB;
+            });
+
             return res.render('appointment_list_page', {
                 'sessionModel': sessionModel,
                 'appointmentList': appointmentList
@@ -46,6 +53,13 @@ module.exports = function(req, res) {
                 });
             }
 
+            // Sort Appointments
+            appointmentList.sort(function(a, b) {
+                var yyyymmddhhA = a['appointmentItem']['yyyymmddhh'];
+                var yyyymmddhhB = b['appointmentItem']['yyyymmddhh'];
+                return yyyymmddhhA - yyyymmddhhB;
+            });
+
             return res.render('appointment_list_page', {
                 'sessionModel': sessionModel,
                 'appointmentList': appointmentList
@@ -61,6 +75,13 @@ module.exports = function(req, res) {
                     err: err
                 });
             }
+
+            // Sort Appointments
+            appointmentList.sort(function(a, b) {
+                var yyyymmddhhA = a['appointmentItem']['yyyymmddhh'];
+                var yyyymmddhhB = b['appointmentItem']['yyyymmddhh'];
+                return yyyymmddhhA - yyyymmddhhB;
+            });
 
             return res.render('appointment_list_page', {
                 'sessionModel': sessionModel,
