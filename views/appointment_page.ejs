@@ -25,6 +25,22 @@
             <li>Tutor: <a href="/user?user_id=<%= tutorUserItem['user_id'] %>"><%= tutorUserItem['name'] %> (<%= tutorUserItem['email_lowercase'] %>)</a></li>
             <li>Student: <a href="/user?user_id=<%= studentUserItem['user_id'] %>"><%= studentUserItem['name'] %> (<%= studentUserItem['email_lowercase'] %>)</a></li>
             <li>Note: <%= appointmentItem['adminNote'] %></li>
+            <li>
+              Actions: 
+              <form action="/appointment-archive" method="post">
+                <input type="hidden" name="appointment_id" value="<%= appointmentId %>"/>
+                <% if (sessionModel.isUserAdmin()) { %>
+                  <input type="hidden" name="note" value="admin archive"/>
+                  <input type="submit" value="Archive"/>
+                <% } else if (sessionModel.isUserTutor()) { %>
+                  <input type="hidden" name="note" value="tutor cancel"/>
+                  <input type="submit" value="Cancel"/>
+                <% } else if (sessionModel.isUserStudent()) { %>
+                  <input type="hidden" name="note" value="student cancel"/>
+                  <input type="submit" value="Cancel"/>
+                <% } %>
+              </form>
+            </li>
           </ul>
         </div>
       </div>

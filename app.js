@@ -48,11 +48,12 @@ if (cluster.isMaster) {
     var tutorCurriculumRemovePostHandler = require('./handler/tutor_curriculum_remove_post_handler.js');
     var tutorAvailabilityListPageHandler   = require('./handler/tutor_availability_list_page_handler.js');
     var tutorAvailabilityUpdatePostHandler = require('./handler/tutor_availability_update_post_handler.js');
-    var appointmentPageHandler       = require('./handler/appointment_page_handler.js');
-    var appointmentListPageHandler   = require('./handler/appointment_list_page_handler.js');
-    var appointmentCreatePageHandler = require('./handler/appointment_create_page_handler.js');
-    var appointmentCreatePostHandler = require('./handler/appointment_create_post_handler.js');
-    var appointmentNotePostHandler   = require('./handler/appointment_note_post_handler.js');
+    var appointmentPageHandler        = require('./handler/appointment_page_handler.js');
+    var appointmentListPageHandler    = require('./handler/appointment_list_page_handler.js');
+    var appointmentCreatePageHandler  = require('./handler/appointment_create_page_handler.js');
+    var appointmentCreatePostHandler  = require('./handler/appointment_create_post_handler.js');
+    var appointmentNotePostHandler    = require('./handler/appointment_note_post_handler.js');
+    var appointmentArchivePostHandler = require('./handler/appointment_archive_post_handler.js');
 
     //-- APP SETUP --//
 
@@ -82,11 +83,12 @@ if (cluster.isMaster) {
     app.post('/tutor-curriculum-remove-post', tutorCurriculumRemovePostHandler);
     app.get ('/tutor-availability-list',        tutorAvailabilityListPageHandler);
     app.post('/tutor-availability-update-post', tutorAvailabilityUpdatePostHandler);
-    app.get ('/appointment-view'  , appointmentPageHandler);
-    app.get ('/appointment-list'  , appointmentListPageHandler);
-    app.get ('/appointment-create', appointmentCreatePageHandler);
-    app.post('/appointment-create', appointmentCreatePostHandler);
-    app.post('/appointment-note'  , appointmentNotePostHandler);
+    app.get ('/appointment-view'    , appointmentPageHandler);
+    app.get ('/appointment-list'    , appointmentListPageHandler);
+    app.get ('/appointment-create'  , appointmentCreatePageHandler);
+    app.post('/appointment-create'  , appointmentCreatePostHandler);
+    app.post('/appointment-note'    , appointmentNotePostHandler);
+    app.post('/appointment-archive' , appointmentArchivePostHandler);
 
     //-- APP START --//
 

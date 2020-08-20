@@ -1,5 +1,6 @@
 
 // DEPENDENCY
+var async = require('async');
 var dynamodb = require('../client/dynamodb.js');
 var appointmentUtil = require('../util/appointment_util.js');
 
@@ -8,6 +9,7 @@ function AppointmentService () {
     
     this.ddbClient = dynamodb.dynamodbClient();
     this.ddbAppointmentTableName = "mf-prod-appointment";
+    this.ddbAppointmentArchiveTableName = "mf-prod-appointment-archive";
     this.ddbTutorIndexName = "tutor_user_id-yyyymmddhh-index";
     this.ddbStudentIndexName = "student_user_id-yyyymmddhh-index";
 }
@@ -246,6 +248,102 @@ AppointmentService.prototype.updateStudentNote = function (input, callback) {
 
         //var ddbItem = data.Attributes;
         //console.log(ddbItem);
+
+        return callback();
+    })
+}
+
+AppointmentService.prototype.archiveAppointment = function (input, callback) {
+
+    var ddbClient = this.ddbClient
+    var ddbAppointmentTableName = this.ddbAppointmentTableName;
+    var ddbAppointmentArchiveTableName = this.ddbAppointmentArchiveTableName;
+
+    var inputAppointmentId = input['appointmentId'];
+    var inputNote = input['note'];
+
+    var result = {
+        'ddbItem': {},
+        'appointmentItem': {}
+    };
+
+    async.waterfall([
+
+        function loadAppointment (next) {
+
+            var ddbParams = {
+                'TableName': ddbAppointmentTableName,
+                'Key': {'appointment_id': {'S': inputAppointmentId}}
+            }
+
+            ddbClient.getItem(ddbParams, function(err, data) {
+
+                if (err) {
+                    return next(err);
+                }
+
+                // Not Found
+                if (!data.Item) {
+                    return next(null, {});
+                }
+
+                var appointmentItem = appointmentUtil.mapDynamodbItemToAppointmentItem(data.Item);
+                result['appointmentItem'] = appointmentItem;
+                result['ddbItem'] = data.Item;
+                return next();
+            });
+        },
+
+        function createAppointmentHistory (next) {
+
+            var ddbItem = result['ddbItem'];
+            if (!ddbItem) {
+                return next();
+            }
+
+            ddbItem['archive_note'] = {S: inputNote};
+            
+            var ddbParams = {
+                'TableName': ddbAppointmentArchiveTableName,
+                'Item': ddbItem
+            }
+
+            ddbClient.putItem(ddbParams, function(err, data) {
+
+                if (err) {
+                    return callback(err);
+                }
+
+                var appointmentItem = appointmentUtil.mapDynamodbItemToAppointmentItem(ddbItem);
+                result['appointmentItem'] = appointmentItem;
+                return next();
+            });
+        },
+
+        function removeActiveAppointment (next) {
+
+            var appointmentItem = result['appointmentItem'];
+            if (!appointmentItem) {
+                return next();
+            }
+
+            var ddbParams = {
+                'TableName': ddbAppointmentTableName,
+                'Key': {
+                    'appointment_id': {'S': inputAppointmentId}
+                }
+            }
+
+            ddbClient.deleteItem(ddbParams, function(err, data) {
+                return next(err);
+            });
+        }
+
+    ], function(err) {
+
+        if (err) {
+            return callback(err);
+        }
 
         return callback();
     })
