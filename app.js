@@ -43,6 +43,7 @@ if (cluster.isMaster) {
     var curriculumListPageHandler   = require('./handler/curriculum_list_page_handler.js');
     var curriculumCreatePageHandler = require('./handler/curriculum_create_page_handler.js');
     var curriculumCreatePostHandler = require('./handler/curriculum_create_post_handler.js');
+    var curriculumRemovePostHandler = require('./handler/curriculum_remove_post_handler.js');
     var tutorCurriculumListPageHandler   = require('./handler/tutor_curriculum_list_page_handler.js');
     var tutorCurriculumAddPostHandler    = require('./handler/tutor_curriculum_add_post_handler.js');
     var tutorCurriculumRemovePostHandler = require('./handler/tutor_curriculum_remove_post_handler.js');
@@ -78,6 +79,7 @@ if (cluster.isMaster) {
     app.get ('/curriculum-list',   curriculumListPageHandler);
     app.get ('/curriculum-create', curriculumCreatePageHandler);
     app.post('/curriculum-create', curriculumCreatePostHandler);
+    app.post('/curriculum-remove', curriculumRemovePostHandler);
     app.get ('/tutor-curriculum-list',        tutorCurriculumListPageHandler);
     app.post('/tutor-curriculum-add-post',    tutorCurriculumAddPostHandler);
     app.post('/tutor-curriculum-remove-post', tutorCurriculumRemovePostHandler);

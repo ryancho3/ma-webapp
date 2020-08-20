@@ -22,6 +22,12 @@
             <% for(var i=0; i<curriculumModels.length; i++) { %>
               <% var curriculumModel = curriculumModels[i]; %>
               <li><a href="/curriculum-view?curriculum_id=<%= curriculumModel.getId() %>"><%= curriculumModel.getName() %></a></li>
+              <% if (sessionModel.isUserAdmin()) { %>
+                <form action="/curriculum-remove" method="post">
+                  <input type="hidden" name="curriculum_id" value="<%= curriculumModel.getId() %>"/>
+                  <input type="submit" value="Remove"/>
+                </form>
+              <% } %>
             <% } %>
           </ul>
       </div>

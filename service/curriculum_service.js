@@ -76,6 +76,22 @@ CurriculumService.prototype.listCurriculum = function(callback) {
     });
 }
 
+CurriculumService.prototype.removeCurriculum = function(input, callback) {
+
+    var inputCurriculumId = input['curriculumId'];
+
+    var ddbParams = {
+        'TableName': this.ddbTable,
+        'Key': {
+            'curriculum_id': {'S': inputCurriculumId}
+        }
+    }
+
+    this.ddbClient.deleteItem(ddbParams, function(err, data) {
+        return callback(err);
+    });
+}
+
 // EXPORT
 var curriculumService = new CurriculumService();
 module.exports = curriculumService;
