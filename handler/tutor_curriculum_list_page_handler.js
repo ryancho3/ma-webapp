@@ -55,6 +55,20 @@ module.exports = function(req, res) {
                 }
             });
 
+            // Sort Include Curriculum Items
+            includeCurriculumObjList.sort(function(a, b) {
+                var nameA = a['name'];
+                var nameB = b['name'];
+                return nameA.localeCompare(nameB);
+            })
+
+            // Sort Exclude Curriculum Items
+            excludeCurriculumObjList.sort(function(a, b) {
+                var nameA = a['name'];
+                var nameB = b['name'];
+                return nameA.localeCompare(nameB);
+            })
+
             return res.render('tutor_curriculum_list_page', {
                 'sessionModel': req.sessionModel,
                 'includeCurriculumObjList': includeCurriculumObjList,
