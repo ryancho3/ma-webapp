@@ -127,7 +127,11 @@ function loadUpcomingAppointments(startYYYYMMDD, callback) {
                 }
 
                 var appointment = output['appointment'];
-                appointmentList.push(appointment);
+
+                // ensure curriculum exists (could have been deleted)
+                if (appointment['curriculumItem']) {
+                    appointmentList.push(appointment);
+                }
 
                 return callback();
             })
@@ -180,7 +184,11 @@ function loadTutorAppointments(tutorUserId, startYYYYMMDD, callback) {
                 }
 
                 var appointment = output['appointment'];
-                appointmentList.push(appointment);
+
+                // ensure curriculum exists (could have been deleted)
+                if (appointment['curriculumItem']) {
+                    appointmentList.push(appointment);
+                }
 
                 return callback();
             })
@@ -233,7 +241,11 @@ function loadStudentAppointments(studentUserId, startYYYYMMDD, callback) {
                 }
 
                 var appointment = output['appointment'];
-                appointmentList.push(appointment);
+
+                // ensure curriculum exists (could have been deleted)
+                if (appointment['curriculumItem']) {
+                    appointmentList.push(appointment);
+                }
 
                 return callback();
             })
