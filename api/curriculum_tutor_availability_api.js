@@ -3,7 +3,14 @@
 var async = require('async');
 var tutorService = require('../service/tutor_service.js');
 var userService = require('../service/user_service.js');
+var helper = require('./helper.js');
 
+/**
+ * Fetch list of tutors who are available to each a specific curriculum at a specicif time slot.
+ * 
+ * @param {*} apiInput 
+ * @param {*} apiCallback 
+ */
 module.exports = function(apiInput, apiCallback) {
 
     var inputCurriculumId = apiInput['curriculumId'];
@@ -61,7 +68,7 @@ module.exports = function(apiInput, apiCallback) {
                     return next(err);
                 }
 
-                result['tutorUserInfoList'] = output['userObjList'];
+                result['tutorUserInfoList'] = output['userItems'];
                 return next();
             })
         }
@@ -107,7 +114,7 @@ function fetchAvailabilityForTutorUserIds (input, callback) {
 
     async.each(inputTutorUserIdList, function(tutorUserId, callback) {
 
-        fetchTutorAvailability({
+        helper.fetchTutorAvailability({
             'tutorUserId': tutorUserId,
             'startYYYYMMDD': inputYYYYMMDD,
             'endYYYYMMDD': inputYYYYMMDD
@@ -138,32 +145,4 @@ function fetchAvailabilityForTutorUserIds (input, callback) {
             'tutorUserIdList': outputTutorUserIds
         });
     })
-}
-
-function fetchTutorAvailability (input, callback) {
-
-    var inputTutorUserId = input.tutorUserId;
-    var inputStartYYYYMMDD = input.startYYYYMMDD;
-    var inputEndYYYYMMDD = input.endYYYYMMDD;
-
-    // TODO: fetch appointments and remove from availability hours
-
-    tutorService.queryAvailabilityForTutor({
-        'tutorUserId': inputTutorUserId,
-        'startYYYYMMDD': inputStartYYYYMMDD,
-        'endYYYYMMDD': inputEndYYYYMMDD
-
-    }, function (err, output) {
-
-        if (err) {
-            return callback(err);
-        }
-
-        var dateToAvailableHourListMap = output.dateToAvailableHourListMap;
-
-        return callback(null, {
-            'tutorUserId': inputTutorUserId,
-            'dateToAvailableHourListMap': dateToAvailableHourListMap
-        });
-    });
 }

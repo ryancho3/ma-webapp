@@ -6,6 +6,8 @@ var curriculumTutorAvailabilityAPI = require('../api/curriculum_tutor_availabili
 
 module.exports = function(req, res) {
 
+    var sessionModel = req.sessionModel;
+
     var inputCurriculumId = req.query.curriculumId;
     var inputYYYYMMDD = req.query.yyyymmdd;
     var inputHour = req.query.hour;
@@ -60,7 +62,7 @@ module.exports = function(req, res) {
         var appointmentTime = inputHour + ":00";
 
         return res.render('appointment_create_page', {
-            'session_user': req.session_user,
+            'sessionModel': sessionModel,
             'curriculum_info': result['curriculumInfo'],
             'curriculum_id': inputCurriculumId,
             'yyyymmdd': inputYYYYMMDD,

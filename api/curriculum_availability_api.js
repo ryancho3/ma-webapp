@@ -3,11 +3,15 @@
 var async = require('async');
 var availabilityUtil = require('../util/availability_util.js');
 var tutorService = require('../service/tutor_service.js');
-var curriculumService = require('../service/curriculum_service.js');
+var helper = require('./helper.js');
 
+/**
+ * Fetch a list of available timeslots for a specific curriculum for a range of dates.
+ * 
+ * @param {*} input 
+ * @param {*} callback 
+ */
 module.exports = function(input, callback) { // callback(err, output)
-
-//module.exports = function(req, res) {
 
     var inputCurriculumId = input.curriculumId;
     var inputStartYYYYMMDD = input.startYYYYMMDD;
@@ -83,7 +87,7 @@ function fetchAvailabilityForTutorUserIds (input, callback) {
 
     async.each(inputTutorUserIdList, function(tutorUserId, callback) {
 
-        fetchTutorAvailability({
+        helper.fetchTutorAvailability({
             'tutorUserId': tutorUserId,
             'startYYYYMMDD': inputStartYYYYMMDD,
             'endYYYYMMDD': inputEndYYYYMMDD
@@ -129,32 +133,4 @@ function fetchAvailableTutorUserIds (input, callback) {
             'tutorUserIdList': tutorUserIdList
         });
     })
-}
-
-function fetchTutorAvailability (input, callback) {
-
-    var inputTutorUserId = input.tutorUserId;
-    var inputStartYYYYMMDD = input.startYYYYMMDD;
-    var inputEndYYYYMMDD = input.endYYYYMMDD;
-
-    // TODO: fetch appointments and remove from availability hours
-
-    tutorService.queryAvailabilityForTutor({
-        'tutorUserId': inputTutorUserId,
-        'startYYYYMMDD': inputStartYYYYMMDD,
-        'endYYYYMMDD': inputEndYYYYMMDD
-
-    }, function (err, output) {
-
-        if (err) {
-            return callback(err);
-        }
-
-        var dateToAvailableHourListMap = output.dateToAvailableHourListMap;
-
-        return callback(null, {
-            'tutorUserId': inputTutorUserId,
-            'dateToAvailableHourListMap': dateToAvailableHourListMap
-        });
-    });
 }
