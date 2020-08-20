@@ -8,8 +8,9 @@ var appointmentLoadAPI = require('../api/appointment_load_api.js');
 // HANDLER
 module.exports = function(req, res) {
 
-    var sessionUserItem = req.session_user;
-    var sessionUserType = sessionUserItem['user_type'];
+    var sessionModel = req.sessionModel;
+    var sessionUserId = sessionModel.getSessionUserId();
+    var sessionUserType = sessionModel.getUserType();
 
     var todayDate = new Date();
     var lastWeekDate = new Date();
@@ -30,14 +31,14 @@ module.exports = function(req, res) {
             }
 
             return res.render('appointment_list_page', {
-                'session_user': sessionUserItem,
+                'sessionModel': sessionModel,
                 'appointmentList': appointmentList
             });
         })
 
     } else if (sessionUserType === 'TUTOR') {
 
-        loadTutorAppointments(sessionUserItem['user_id'], lastWeekYYYYMMDD, function(err, appointmentList) {
+        loadTutorAppointments(sessionUserId, lastWeekYYYYMMDD, function(err, appointmentList) {
 
             if (err) {
                 return res.render('error_page', {
@@ -46,14 +47,14 @@ module.exports = function(req, res) {
             }
 
             return res.render('appointment_list_page', {
-                'session_user': sessionUserItem,
+                'sessionModel': sessionModel,
                 'appointmentList': appointmentList
             });
         })
 
     } else {
 
-        loadStudentAppointments(sessionUserItem['user_id'], lastWeekYYYYMMDD, function(err, appointmentList) {
+        loadStudentAppointments(sessionUserId, lastWeekYYYYMMDD, function(err, appointmentList) {
 
             if (err) {
                 return res.render('error_page', {
@@ -62,7 +63,7 @@ module.exports = function(req, res) {
             }
 
             return res.render('appointment_list_page', {
-                'session_user': sessionUserItem,
+                'sessionModel': sessionModel,
                 'appointmentList': appointmentList
             });
         })

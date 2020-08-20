@@ -6,6 +6,6 @@ var userService = require('../service/user_service.js');
 module.exports = function(req, res) {
 
     res.render('login_form_page', {
-        'session_user': req.session_user,
+        'sessionModel': req.sessionModel,
     });
 }

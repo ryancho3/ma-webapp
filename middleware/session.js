@@ -1,9 +1,14 @@
 
 // DEPENDENCY
+var SessionModel = require('../model/session_model.js');
 var userService = require('../service/user_service.js');
 var sessionService = require('../service/session_service.js');
 
 module.exports = function(req, res, next) {
+
+    // Create SessionModel
+    var sessionModel = new SessionModel();
+    req.sessionModel = sessionModel;
 
     var cookies = req.cookies;
 
@@ -29,12 +34,17 @@ module.exports = function(req, res, next) {
             return next();
         }
 
+        var sessionItem = output['sessionItem'];
+
         // Session obj not found
-        if (!output.session_obj) {
+        if (!sessionItem) {
             return next();
         }
 
-        var sessionUserId = output.session_obj.user_id;
+        // Set session item
+        sessionModel.setSessionItem(sessionItem);
+
+        var sessionUserId = sessionModel.getSessionUserId();
 
         // Session user id not found
         if (!sessionUserId) {
@@ -49,18 +59,10 @@ module.exports = function(req, res, next) {
                 return next();
             }
 
-            var user_obj = output.user_obj;
-
-            // Set session obj in request
-            if (user_obj) {
-                req.session_user = {
-                    'session_id': session_id,
-                    'user_id': user_obj.user_id,
-                    'user_type': user_obj.user_type,
-                    'name': user_obj.name,
-                    'email': user_obj.email_lowercase,
-                }
-                //console.log("Middleware Loaded Session User: " + JSON.stringify(req.session_user));
+            // Set Session User Item
+            var userItem = output.userItem;
+            if (userItem) {
+                sessionModel.setUserItem(userItem);
             }
 
             return next();

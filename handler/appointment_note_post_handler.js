@@ -1,12 +1,14 @@
 
 // DEPENDENCY
 var appointmentService = require('../service/appointment_service.js');
+const session = require('../middleware/session.js');
 
 module.exports = function(req, res) {
 
+    var sessionModel = req.sessionModel;
+    var sessionUserType = sessionModel.getUserType();
+
     // TODO: check permission
-    var sessionUserItem = req.session_user;
-    var sessionUserType = sessionUserItem['user_type'];
 
     var input = {};
     input.appointmentId = req.body.appointmentId;

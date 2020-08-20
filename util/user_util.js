@@ -20,13 +20,13 @@ function newDynamodbItemFromInput(userInput) {
     return dynamodbItem;
 }
 
-function mapDynamodbItemToUserObj(dynamodbItem) {
+function mapDynamodbItemToUserItem(dynamodbItem) {
 
     if (!dynamodbItem) {
         return null;
     }
 
-    var userObj = {
+    var userItem = {
         'user_id': dynamodbItem.user_id['S'],
         'user_type': dynamodbItem.user_type['S'],
         'email_lowercase': dynamodbItem.email_lowercase['S'],
@@ -35,8 +35,8 @@ function mapDynamodbItemToUserObj(dynamodbItem) {
         'profile': dynamodbItem.profile['S'],
     };
 
-    return userObj;
+    return userItem;
 }
 
 module.exports.newDynamodbItemFromInput = newDynamodbItemFromInput;
-module.exports.mapDynamodbItemToUserObj = mapDynamodbItemToUserObj;
+module.exports.mapDynamodbItemToUserItem = mapDynamodbItemToUserItem;

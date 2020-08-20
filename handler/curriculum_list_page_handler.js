@@ -30,7 +30,7 @@ module.exports = function(req, res) {
         })
 
         res.render('curriculum_list_page', {
-            'session_user': req.session_user,
+            'sessionModel': req.sessionModel,
             'curriculumModels': curriculumModels,
             'curriculumItems': curriculumItems
         });

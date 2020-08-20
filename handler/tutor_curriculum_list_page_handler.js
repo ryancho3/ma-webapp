@@ -6,14 +6,15 @@ var curriculumService = require('../service/curriculum_service.js');
 // HANDLER
 module.exports = function(req, res) {
 
-    var sessionUser = req.session_user;
-    if (!sessionUser) {
+    var sessionModel = req.sessionModel;
+
+    if (!sessionModel.isLoggedIn()) {
         return res.render('error_page', {
             err: new Error("no session user")
         });
     }
 
-    var sessionUserId = sessionUser.user_id
+    var sessionUserId = sessionModel.getSessionUserId();
 
     tutorService.listCurriculumIdsForUser({
         'tutorUserId': sessionUserId
@@ -35,7 +36,7 @@ module.exports = function(req, res) {
                 });
             }
 
-            var curriculumObjList = output.curriculum_list;
+            var curriculumObjList = output['curriculumItems'];
 
             var includeCurriculumIdMap = {};
             tutorCurriculumIdList.forEach(function (curriculumId) {
@@ -55,7 +56,7 @@ module.exports = function(req, res) {
             });
 
             return res.render('tutor_curriculum_list_page', {
-                'session_user': req.session_user,
+                'sessionModel': req.sessionModel,
                 'includeCurriculumObjList': includeCurriculumObjList,
                 'excludeCurriculumObjList': excludeCurriculumObjList
             });

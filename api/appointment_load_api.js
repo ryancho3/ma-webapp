@@ -66,8 +66,8 @@ module.exports = function(apiInput, apiCallback) {
                         return done(err);
                     }
 
-                    var userObj = output['user_obj'];
-                    result['studentUserItem'] = userObj; 
+                    var userItem = output['userItem'];
+                    result['studentUserItem'] = userItem; 
                     return done();
                 });
             },
@@ -86,8 +86,8 @@ module.exports = function(apiInput, apiCallback) {
                         return done(err);
                     }
 
-                    var userObj = output['user_obj'];
-                    result['tutorUserItem'] = userObj; 
+                    var userItem = output['userItem'];
+                    result['tutorUserItem'] = userItem; 
                     return done();
                 });
             }

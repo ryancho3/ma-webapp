@@ -5,14 +5,15 @@ var tutorService = require('../service/tutor_service.js');
 // HANDLER
 module.exports = function(req, res) {
 
-    var sessionUser = req.session_user;
-    if (!sessionUser) {
+    var sessionModel = req.sessionModel;
+
+    if (!sessionModel.isLoggedIn()) {
         return res.render('error_page', {
             err: new Error("no session user")
         });
     }
 
-    var sessionUserId = sessionUser.user_id
+    var sessionUserId = sessionModel.getSessionUserId();
     var inputCurriculumId = req.body.curriculum_id;
 
     tutorService.removeCurriculumForTutor({

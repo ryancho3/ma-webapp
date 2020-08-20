@@ -70,8 +70,8 @@ module.exports = function(req, res) {
                         return done(err);
                     }
 
-                    var userObj = output['user_obj'];
-                    result['studentUserItem'] = userObj; 
+                    var userItem = output['userItem'];
+                    result['studentUserItem'] = userItem; 
                     return done();
                 });
             },
@@ -90,8 +90,8 @@ module.exports = function(req, res) {
                         return done(err);
                     }
 
-                    var userObj = output['user_obj'];
-                    result['tutorUserItem'] = userObj; 
+                    var userItem = output['userItem'];
+                    result['tutorUserItem'] = userItem; 
                     return done();
                 });
             }
@@ -105,7 +105,7 @@ module.exports = function(req, res) {
             }
 
             return res.render('appointment_page', {
-                'session_user': req.session_user,
+                'sessionModel': req.sessionModel,
                 'appointmentId': inputAppointmentId,
                 'appointmentItem': result['appointmentItem'],
                 'curriculumItem': result['curriculumItem'],

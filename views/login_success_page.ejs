@@ -20,11 +20,11 @@
         <h2>User Login Success!</h2>
         <div>
             <strong>Name: </strong>
-            <span><%= session_user['name'] %></span>
+            <span><%= sessionModel.getUserName() %></span>
         </div>
         <div>
             <strong>Email: </strong>
-            <span><%= session_user['email'] %></span>
+            <span><%= sessionModel.getUserEmail() %></span>
         </div>
       </div>
 

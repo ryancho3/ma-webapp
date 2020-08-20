@@ -15,19 +15,19 @@ function newDynamodbItemFromInput(sessionInput) {
     return dynamodbItem;
 }
 
-function mapDynamodbItemToSessionObj(dynamodbItem) {
+function mapDynamodbItemToSessionItem(dynamodbItem) {
 
     if (!dynamodbItem) {
         return null;
     }
 
-    var sessionObj = {
-        'session_id': dynamodbItem.session_id['S'],
-        'user_id': dynamodbItem.user_id['S']
+    var sessionItem = {
+        'sessionId': dynamodbItem.session_id['S'],
+        'userId': dynamodbItem.user_id['S']
     };
 
-    return sessionObj;
+    return sessionItem;
 }
 
 module.exports.newDynamodbItemFromInput = newDynamodbItemFromInput;
-module.exports.mapDynamodbItemToSessionObj = mapDynamodbItemToSessionObj;
+module.exports.mapDynamodbItemToSessionItem = mapDynamodbItemToSessionItem;

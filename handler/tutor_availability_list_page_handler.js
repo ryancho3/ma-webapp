@@ -9,8 +9,9 @@ const session = require('../middleware/session.js');
 // HANDLER
 module.exports = function(req, res) {
 
-    var sessionUser = req.session_user;
-    if (!sessionUser) {
+    var sessionModel = req.sessionModel;
+
+    if (!sessionModel.isLoggedIn()) {
         return res.render('error_page', {
             err: new Error("no session user")
         });
@@ -27,7 +28,7 @@ module.exports = function(req, res) {
     var weekStartYYYYMMDD = stringUtil.parseYYYYMMDDIntFromDate(weekStartDate);
     var weekEndYYYYMMDD = stringUtil.parseYYYYMMDDIntFromDate(weekEndDate);
 
-    var sessionUserId = sessionUser.user_id
+    var sessionUserId = sessionModel.getSessionUserId();
     var inputStartYYYYMMDD = weekStartYYYYMMDD;
     var inputEndYYYYMMDD = weekEndYYYYMMDD;
 
@@ -54,7 +55,7 @@ module.exports = function(req, res) {
         var dateToAvailableHourListMap = result.dateToAvailableHourListMap;
 
         return res.render('tutor_availability_list_page', {
-            'session_user': req.session_user,
+            'sessionModel': req.sessionModel,
             'todayYYYYMMDD': todayYYYYMMDD,
             'weekStartYYYYMMDD': weekStartYYYYMMDD,
             'weekEndYYYYMMDD': weekEndYYYYMMDD,

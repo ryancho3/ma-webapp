@@ -5,11 +5,11 @@
 </div>
 
 <div id="user_menu">
-    <% if (typeof session_user != "undefined" && session_user) { %>
-        <span><%= session_user.name %> (<%= session_user.user_type %>)</span>
+    <% if (typeof sessionModel != "undefined" && sessionModel.isLoggedIn()) { %>
+        <span><%= sessionModel.getUserName() %> (<%= sessionModel.getUserType() %>)</span>
 
         <span>[</span>
-        <% if (session_user['user_type'] === 'TUTOR') { %>
+        <% if (sessionModel.isUserTutor()) { %>
             <a href="/user">Profile</a>
             <span> | </span>
             <a href="/appointment-list">Appointments</a>

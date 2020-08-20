@@ -26,10 +26,10 @@ UserService.prototype.createUser = function(input, callback) {
             return callback(err);
         }
 
-        var userObj = userUtil.mapDynamodbItemToUserObj(ddbItem);
+        var userItem = userUtil.mapDynamodbItemToUserItem(ddbItem);
 
         return callback(null, {
-            'user_obj': userObj
+            'userItem': userItem
         });
     });
 }
@@ -40,7 +40,7 @@ UserService.prototype.loadUser = function(input, callback) {
 
     var ddbParams = {
         'TableName': this.ddbUserTable,
-        'Key': {'user_id': {'S': input.user_id}},
+        'Key': {'user_id': {'S': inputUserId}},
     }
 
     this.ddbClient.getItem(ddbParams, function(err, data) {
@@ -49,10 +49,10 @@ UserService.prototype.loadUser = function(input, callback) {
             return callback(err);
         }
         
-        var userObj = userUtil.mapDynamodbItemToUserObj(data.Item);
+        var userItem = userUtil.mapDynamodbItemToUserItem(data.Item);
 
         return callback(null, {
-            'user_obj': userObj
+            'userItem': userItem
         });
     });
 }
@@ -76,8 +76,6 @@ UserService.prototype.loadUserInBatch = function(input, callback) {
         RequestItems: ddbRequestItems
     };
 
-    console.log(JSON.stringify(ddbParams))
-
     this.ddbClient.batchGetItem(ddbParams, function(err, data) {
 
         if (err) {
@@ -87,14 +85,14 @@ UserService.prototype.loadUserInBatch = function(input, callback) {
         var ddbItems = data.Responses[ddbTable];
 
         // Parse User Objects
-        var userObjList = [];
+        var userItems = [];
         ddbItems.forEach(function(ddbItem) {
-            var userObj = userUtil.mapDynamodbItemToUserObj(ddbItem);
-            userObjList.push(userObj);
+            var userItem = userUtil.mapDynamodbItemToUserItem(ddbItem);
+            userItems.push(userItem);
         })
 
         return callback(null, {
-            'userObjList': userObjList
+            'userItems': userItems
         });
     })
 }
@@ -125,10 +123,10 @@ UserService.prototype.loadUserByEmail = function(input, callback) {
         }
 
         var ddbItem = data.Items[0];
-        var userObj = userUtil.mapDynamodbItemToUserObj(ddbItem);
+        var userItem = userUtil.mapDynamodbItemToUserItem(ddbItem);
 
         return callback(null, {
-            'user_obj': userObj
+            'userItem': userItem
         });
     });
 }

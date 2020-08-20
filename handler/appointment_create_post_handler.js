@@ -5,10 +5,9 @@ var appointmentService = require('../service/appointment_service.js');
 module.exports = function(req, res) {
 
     // TODO: check permission
-    req.session_user.user_id;
 
     var input = {};
-    input.studentUserId = req.session_user.user_id;
+    input.studentUserId = req.sessionModel.getSessionUserId();
     input.curriculumId = req.body.curriculum_id;
     input.tutorUserId = req.body.tutor_user_id;
     input.yyyymmdd = req.body.yyyymmdd;
@@ -25,7 +24,7 @@ module.exports = function(req, res) {
         var appointmentItem = output['appointmentItem'];
 
         res.render('appointment_create_success_page', {
-            'session_user': req.session_user,
+            'sessionModel': req.sessionModel,
             'appointment_item': appointmentItem
         });
     });

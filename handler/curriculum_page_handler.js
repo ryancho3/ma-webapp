@@ -55,7 +55,7 @@ module.exports = function(req, res) {
                     return done(err);
                 }
 
-                console.log(apiOutput);
+                //console.log(apiOutput);
 
                 result['curriculumAvailability'] = apiOutput['curriculumAvailability'];
                 return done();
@@ -70,7 +70,7 @@ module.exports = function(req, res) {
         }
 
         res.render('curriculum_page', {
-            'session_user': req.session_user,
+            'sessionModel': req.sessionModel,
             'curriculumId': input.curriculum_id,
             'curriculumInfo': result['curriculumInfo'],
             'curriculumAvailability': result['curriculumAvailability']

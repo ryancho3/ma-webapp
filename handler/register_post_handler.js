@@ -1,5 +1,6 @@
 
 // DEPENDENCY
+var SessionModel = require('../model/session_model.js');
 var userService = require('../service/user_service.js');
 var sessionService = require('../service/session_service.js');
 
@@ -20,10 +21,10 @@ module.exports = function(req, res) {
             return;
         }
 
-        var user_obj = output.user_obj;
+        var userItem = output.userItem;
 
         sessionService.createSession({
-            'user_id': user_obj.user_id,
+            'user_id': userItem.user_id,
 
         }, function(err, output) {
 
@@ -34,23 +35,24 @@ module.exports = function(req, res) {
                 return;
             }
 
-            var session_obj = output.session_obj;
+            var sessionItem = output.sessionItem;
 
-            if (session_obj) {
-                var session_id = session_obj.session_id;
-                res.cookie('session_id', session_id);
-                req.session_user = {
-                    'session_id': session_id,
-                    'user_id': user_obj.user_id,
-                    'user_type': user_obj.user_type,
-                    'name': user_obj.name,
-                    'email': user_obj.email_lowercase,
-                }
+            if (sessionItem) {
+
+                // Set Cookie
+                var sessionId = sessionItem['sessionId'];
+                res.cookie('session_id', sessionId);
+
+                // Set SessionModel
+                req.sessionModel = new SessionModel();
+                req.sessionModel.setSessionItem(sessionItem);
+                req.sessionModel.setUserItem(userItem);
             }
 
+
             return res.render('register_success_page', {
-                'session_user': req.session_user,
-                'user_obj': output.user_obj,
+                'sessionModel': req.sessionModel,
+                'userItem': output.userItem,
             });
         });
     });

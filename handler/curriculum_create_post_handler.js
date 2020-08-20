@@ -17,7 +17,7 @@ module.exports = function(req, res) {
         }
 
         res.render('curriculum_create_success_page', {
-            'session_user': req.session_user,
+            'sessionModel': req.sessionModel,
             'curriculum_obj': output.curriculum_obj,
         });
         return;

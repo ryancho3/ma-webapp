@@ -24,10 +24,10 @@ SessionService.prototype.createSession = function(input, callback) {
             return callback(err);
         }
 
-        var sessionObj = sessionUtil.mapDynamodbItemToSessionObj(ddbItem);
+        var sessionItem = sessionUtil.mapDynamodbItemToSessionItem(ddbItem);
 
         return callback(null, {
-            'session_obj': sessionObj
+            'sessionItem': sessionItem
         });
     });
 }
@@ -53,10 +53,10 @@ SessionService.prototype.loadSession = function(input, callback) {
         }
 
         // Session found
-        var sessionObj = sessionUtil.mapDynamodbItemToSessionObj(data.Item);
+        var sessionItem = sessionUtil.mapDynamodbItemToSessionItem(data.Item);
 
         return callback(null, {
-            'session_obj': sessionObj
+            'sessionItem': sessionItem
         });
     });
 }
