@@ -1,4 +1,7 @@
 
+// DEPENDENCY
+var stringUtil = require('../util/string_util.js');
+
 function AppointmentModel() {
 
     this.appointmentItem = null;
@@ -114,11 +117,14 @@ AppointmentModel.prototype.getAppointmentStartDateString = function() {
 
     var yyyymmddhh = this.appointmentItem['yyyymmddhh']
 
+    var yyyymmdd = yyyymmddhh.substring(0, 8);
+    var dayString = stringUtil.parseFullDayStringFromYYYYMMDD(yyyymmdd); // ex. "Monday"
+
     var stringYYYY = yyyymmddhh.substring(0, 4);
     var stringMM = yyyymmddhh.substring(4, 6);
     var stringDD = yyyymmddhh.substring(6, 8);
 
-    return stringYYYY + "/" + stringMM + "/" + stringDD;
+    return stringYYYY + "/" + stringMM + "/" + stringDD + "(" + dayString + ")";
 }
 
 AppointmentModel.prototype.getAppointmentStartTimeString = function() {
