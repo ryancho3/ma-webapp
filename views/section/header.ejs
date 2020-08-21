@@ -1,4 +1,38 @@
-<div id="header">
+<div class="row">
   <h1>Matchbook Academy</h1>
 </div>
 
+<div id="menu" class="row">
+  <a href="/">HOME</a>
+  <a href="/curriculum-list">CURRICULUMS</a>
+</div>
+
+<div id="user_menu" class="row">
+    <% if (typeof sessionModel != "undefined" && sessionModel.isLoggedIn()) { %>
+        <span><%= sessionModel.getUserName() %> (<%= sessionModel.getUserType() %>)</span>
+
+        <span>[</span>
+        <% if (sessionModel.isUserTutor()) { %>
+            <a href="/user">Profile</a>
+            <span> | </span>
+            <a href="/appointment-list">Appointments</a>
+            <span> | </span>
+            <a href="/tutor-curriculum-list">Manage Curriculums</a>
+            <span> | </span>
+            <a href="/tutor-availability-list">Manage Availability</a>
+
+        <% } else { %>
+            <a href="/user">Profile</a>
+            <span> | </span>
+            <a href="/appointment-list">Appointments</a>
+        <% } %>
+
+        <span> | </span>
+        <a href="/logout">Logout</a>
+        <span>]</span>
+
+    <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    <% } %>
+</div>
