@@ -19,7 +19,6 @@ UserService.prototype.createUser = function(input, callback) {
         'TableName': this.ddbUserTable,
         'Item': ddbItem
     };
-
     this.ddbClient.putItem(ddbParams, function(err, data) {
 
         if (err) {
@@ -29,7 +28,7 @@ UserService.prototype.createUser = function(input, callback) {
         var userItem = userUtil.mapDynamodbItemToUserItem(ddbItem);
 
         return callback(null, {
-            'userItem': userItem
+            'userItem': userItem,
         });
     });
 }
@@ -119,14 +118,17 @@ UserService.prototype.loadUserByEmail = function(input, callback) {
         }
         
         if (data.Items.length === 0) {
-            return callback(null, {});
+            return callback(null, {
+                'noItem' : true
+            });
         }
 
         var ddbItem = data.Items[0];
         var userItem = userUtil.mapDynamodbItemToUserItem(ddbItem);
 
         return callback(null, {
-            'userItem': userItem
+            'userItem': userItem,
+            'noItem' : false
         });
     });
 }

@@ -17,7 +17,6 @@ SessionService.prototype.createSession = function(input, callback) {
         'TableName': this.ddbSessionTable,
         'Item': ddbItem
     };
-
     this.ddbClient.putItem(ddbParams, function(err, data) {
 
         if (err) {
@@ -25,7 +24,6 @@ SessionService.prototype.createSession = function(input, callback) {
         }
 
         var sessionItem = sessionUtil.mapDynamodbItemToSessionItem(ddbItem);
-
         return callback(null, {
             'sessionItem': sessionItem
         });
