@@ -72,6 +72,48 @@ function parseYYYYMMDDHHStringFromYYYYMMDDAndHour(yyyymmdd, hour) {
     return stringYYYYMMDD + "" + stringHH;
 }
 
+function parseShortDayStringFromYYYYMMDD(yyyymmdd) {
+
+    if (!yyyymmdd) {
+        return null;
+    }
+
+    var stringYYYY = yyyymmdd.substring(0, 4);
+    var stringMM = yyyymmdd.substring(4, 6);
+    var stringDD = yyyymmdd.substring(6, 8);
+
+    var intYYYY = parseInt(stringYYYY);
+    var intMM = parseInt(stringMM);
+    var intDD = parseInt(stringDD);
+
+    var date = new Date(intYYYY, intMM - 1, intDD);
+    var dayInt = date.getDay();
+
+    var dayStrings = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return dayStrings[dayInt];
+}
+
+function parseFullDayStringFromYYYYMMDD(yyyymmdd) {
+
+    if (!yyyymmdd) {
+        return null;
+    }
+
+    var stringYYYY = yyyymmdd.substring(0, 4);
+    var stringMM = yyyymmdd.substring(4, 6);
+    var stringDD = yyyymmdd.substring(6, 8);
+
+    var intYYYY = parseInt(stringYYYY);
+    var intMM = parseInt(stringMM);
+    var intDD = parseInt(stringDD);
+
+    var date = new Date(intYYYY, intMM - 1, intDD);
+    var dayInt = date.getDay();
+
+    var dayStrings = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    return dayStrings[dayInt];
+}
+
 // EXPORTS
 module.exports.generateUUIDString = generateUUIDString;
 module.exports.toLowercaseString = toLowercaseString;
@@ -80,3 +122,5 @@ module.exports.parseYYYYMMDDIntFromDate = parseYYYYMMDDIntFromDate;
 module.exports.parseYYYYMMDDStringFromDate = parseYYYYMMDDStringFromDate;
 module.exports.parseDateFromYYYYMMDD = parseDateFromYYYYMMDD;
 module.exports.parseYYYYMMDDHHStringFromYYYYMMDDAndHour = parseYYYYMMDDHHStringFromYYYYMMDDAndHour;
+module.exports.parseShortDayStringFromYYYYMMDD = parseShortDayStringFromYYYYMMDD;
+module.exports.parseFullDayStringFromYYYYMMDD = parseFullDayStringFromYYYYMMDD;
