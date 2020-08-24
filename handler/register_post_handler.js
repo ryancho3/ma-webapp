@@ -1,5 +1,6 @@
 
 // DEPENDENCY
+var async = require('async');
 var SessionModel = require('../model/session_model.js');
 var userService = require('../service/user_service.js');
 var sessionService = require('../service/session_service.js');
@@ -18,57 +19,65 @@ module.exports = function(req, res) {
 
     var userItem;
 
-    userRegisterAPI(input, function(err, output) {
-        if (err) {
-            res.render('error_page', {
-                err: err});
-            return;
-        }
-
-        /*
-        if (output.userCreated === false) {
-            res.render('error_page', {
-                err: output.abortReason
-            })
-            return;
-        }
-        */
-        userItem = output.userItem;
+    async.waterfall([
         
-        sessionService.createSession({
-            'user_id': userItem.user_id,
-
-        }, function(err, output) {
-            console.log("callback");
+        function createUser(next) {
+            userRegisterAPI(input, function(err, output) {
+                if (err) {
+                    return next(err);
+                }
+        
+                /*
+                if (output.userCreated === false) {
+                    res.render('error_page', {
+                        err: output.abortReason
+                    })
+                    return;
+                }
+                */
+                userItem = output.userItem;
+                return next();
+            });
+        },
+        
+        function createSession(next) {
+            sessionService.createSession({
+                'user_id': userItem.user_id,
+    
+            }, function(err, output) {
+                if (err) {
+                    return next(err);
+                }
+    
+                var sessionItem = output.sessionItem;
+    
+                if (sessionItem) {
+    
+                    // Set Cookie
+                    var sessionId = sessionItem['sessionId'];
+                    res.cookie('session_id', sessionId);
+    
+                    // Set SessionModel
+                    req.sessionModel = new SessionModel();
+                    req.sessionModel.setSessionItem(sessionItem);
+                    req.sessionModel.setUserItem(userItem);
+                }
+    
+    
+                res.render('register_success_page', {
+                    'sessionModel': req.sessionModel,
+                    'userItem': output.userItem,
+                });
+                return next();
+            });
+        }
+     ], function(err) {
             if (err) {
                 res.render('error_page', {
-                    err: err
-                })
-                return;
+                    err: err});
             }
 
-            var sessionItem = output.sessionItem;
-
-            if (sessionItem) {
-
-                // Set Cookie
-                var sessionId = sessionItem['sessionId'];
-                res.cookie('session_id', sessionId);
-
-                // Set SessionModel
-                req.sessionModel = new SessionModel();
-                req.sessionModel.setSessionItem(sessionItem);
-                req.sessionModel.setUserItem(userItem);
-            }
-
-
-            return res.render('register_success_page', {
-                'sessionModel': req.sessionModel,
-                'userItem': output.userItem,
-            });
         });
-    });
-}
     /*userService.createUser(input, function(err, output) {
 
         if (err) {
@@ -112,4 +121,4 @@ module.exports = function(req, res) {
         });
     }); */
 
-
+}

@@ -2,27 +2,27 @@
 var async = require('async');
 var availabilityUtil = require('../util/availability_util.js');
 var tutorService = require('../service/tutor_service.js');
-var helper = require('./helper.js');
 var userService = require('../service/user_service.js');
 
 
-module.exports = function(input, callback) {
+module.exports = function(apiInput, apiCallback) {
 
     var result = {
         'userItem' : null
     }
-    var password = input.password;
-    var repeatedPassword = input.repeat;
+    var password = apiInput.password;
+    var repeatedPassword = apiInput.repeat;
     async.waterfall([
 
         function checkDuplicateEmail(next) {
             
-            userService.loadUserByEmail(input, function(err, output) {
+            userService.loadUserByEmail(apiInput, function(err, output) {
                 if (err) {
-                    return callback(err);
+                    return apiCallback(err);
                 }
-        
-                if (output['noItem'] == false) {
+                var userItem = output['userItem'];
+                console.log(userItem);
+                if (userItem) {
                     return next(new Error('Duplicate Email'));
                 }
                 return next();
@@ -49,9 +49,9 @@ module.exports = function(input, callback) {
 
         function generateUser(next) {
             
-            userService.createUser(input, function(err, output) {
+            userService.createUser(apiInput, function(err, output) {
                 if (err) {
-                    return callback(err);
+                    return apiCallback(err);
                 }
                 result['userCreated'] = true;
                 result['userItem'] = output.userItem;
@@ -62,10 +62,10 @@ module.exports = function(input, callback) {
         }
     ], function(err) {
         if (err) {
-            return callback(err);
+            return apiCallback(err);
         }
 
-        return callback(null, result);
+        return apiCallback(null, result);
     });
     
     
@@ -86,7 +86,7 @@ module.exports = function(input, callback) {
     
    /* 
     // Duplicate Email Check
-    return callback(null, {
+    return apiCallback(null, {
         'userCreated' : true,
         'userItem' : output.userItem,
     })
@@ -94,12 +94,12 @@ module.exports = function(input, callback) {
     console.log('Check');
     //TODO: Password Requirement Check
 
-    userService.createUser(apiInput, function(err, output) {
+    userService.createUser(apiapiInput, function(err, output) {
         if (err) {
-            return apiCallback(err);
+            return apiapiCallback(err);
         }
 
-        return apiCallback(null, {
+        return apiapiCallback(null, {
             'userCreated' : true,
             'userItem' : output.userItem,
         })
