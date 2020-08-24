@@ -1,4 +1,61 @@
-<div id="header">
-  <h1>Matchbook Academy</h1>
-</div>
 
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">Matchbook Academy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/curriculum-list">Curriculums</a>
+        </li>
+
+        <% if (typeof sessionModel != "undefined" && sessionModel.isLoggedIn()) { %>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span><%= sessionModel.getUserName() %> (<%= sessionModel.getUserType() %>)</span>
+            </a>
+
+            <% if (sessionModel.isUserTutor()) { %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/user">Profile</a>
+                <a class="dropdown-item" href="/appointment-list">Appointments</a>
+                <a class="dropdown-item" href="/tutor-curriculum-list">Manage Curriculums</a>
+                <a class="dropdown-item" href="/tutor-availability-list">Manage Availability</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+
+            <% } else { %>
+
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/user">Profile</a>
+                <a class="dropdown-item" href="/appointment-list">Appointments</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            <% } %>
+
+          </li>
+
+        <% } else { %>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+
+        <% } %>
+
+      </ul>
+    </div>  
+  </div>
+</nav>

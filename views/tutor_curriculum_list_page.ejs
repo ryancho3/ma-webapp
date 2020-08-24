@@ -8,11 +8,9 @@
   </head>
 
   <body>
+    <%- include('section/header'); %>
+
     <div class="container">
-
-      <%- include('section/header'); %>
-
-      <%- include('section/menu'); %>
 
       <div id="page">
         <h2>Curriculum list</h2>
@@ -38,13 +36,11 @@
           <input type="submit" value="Add">
         </form>
       </div>
-
-      <%- include('section/footer'); %>
-
     </div>
 
+    <%- include('section/footer'); %>
+
     <!-- Static -->
-    <script src="/static/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
 

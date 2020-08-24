@@ -1,1 +1,29 @@
-error! <%= err %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('section/head_common') %>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Matchbook Foundation: Error!</title>
+  </head>
+
+  <body>
+    <%- include('section/header'); %>
+
+    <div class="container">
+      <div id="page">
+        <span>error! <%= err %></span>
+      </div>
+    </div>
+
+    <%- include('section/footer'); %>
+
+    <!-- Static -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
+
