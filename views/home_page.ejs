@@ -4,26 +4,25 @@
     <%- include('section/head_common') %>
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Matchbook Foundation: Home</title>
+    <title>Matchbook Academy: Home</title>
   </head>
 
   <body>
+
+    <%- include('section/header'); %>
+
     <div class="container">
-
-      <%- include('section/header'); %>
-
         <div id="page">
           <h1>Welcome!</h1>
         </div>
-
-      <%- include('section/footer'); %>
-
     </div>
 
+    <%- include('section/footer'); %>
+
     <!-- Static -->
-    <script src="/static/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
+      console.log("READY!");
     })
     </script>
   </body>

@@ -8,9 +8,9 @@
   </head>
 
   <body>
-    <div class="container">
+    <%- include('section/header'); %>
 
-      <%- include('section/header'); %>
+    <div class="container">
 
       <div id="page">
         <h2>Availability list (start:<%= weekStartYYYYMMDD %>, end:<%= weekEndYYYYMMDD %>) </h2>
@@ -49,13 +49,11 @@
         <div style="clear:both">&nbsp;</div>
 
       </div>
-
-      <%- include('section/footer'); %>
-
     </div>
 
+    <%- include('section/footer'); %>
+
     <!-- Static -->
-    <script src="/static/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
 

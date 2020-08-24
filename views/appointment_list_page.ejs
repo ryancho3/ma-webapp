@@ -8,10 +8,9 @@
   </head>
 
   <body>
+    <%- include('section/header'); %>
+
     <div class="container">
-
-      <%- include('section/header'); %>
-
       <div id="page">
         <h2>Appointments</h2>
         <% appointmentModels.forEach(function(appointmentModel) { %>
@@ -40,16 +39,13 @@
               </form>
             </li>
           </ul>
-          
         <% }) %>
       </div>
-
-      <%- include('section/footer'); %>
-
     </div>
 
+    <%- include('section/footer'); %>
+
     <!-- Static -->
-    <script src="/static/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
 

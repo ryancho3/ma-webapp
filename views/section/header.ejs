@@ -1,38 +1,61 @@
-<div class="row">
-  <h1>Matchbook Academy</h1>
-</div>
 
-<div id="menu" class="row">
-  <a href="/">HOME</a>
-  <a href="/curriculum-list">CURRICULUMS</a>
-</div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">Matchbook Academy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/curriculum-list">Curriculums</a>
+        </li>
 
-<div id="user_menu" class="row">
-    <% if (typeof sessionModel != "undefined" && sessionModel.isLoggedIn()) { %>
-        <span><%= sessionModel.getUserName() %> (<%= sessionModel.getUserType() %>)</span>
+        <% if (typeof sessionModel != "undefined" && sessionModel.isLoggedIn()) { %>
 
-        <span>[</span>
-        <% if (sessionModel.isUserTutor()) { %>
-            <a href="/user">Profile</a>
-            <span> | </span>
-            <a href="/appointment-list">Appointments</a>
-            <span> | </span>
-            <a href="/tutor-curriculum-list">Manage Curriculums</a>
-            <span> | </span>
-            <a href="/tutor-availability-list">Manage Availability</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span><%= sessionModel.getUserName() %> (<%= sessionModel.getUserType() %>)</span>
+            </a>
+
+            <% if (sessionModel.isUserTutor()) { %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/user">Profile</a>
+                <a class="dropdown-item" href="/appointment-list">Appointments</a>
+                <a class="dropdown-item" href="/tutor-curriculum-list">Manage Curriculums</a>
+                <a class="dropdown-item" href="/tutor-availability-list">Manage Availability</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+
+            <% } else { %>
+
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/user">Profile</a>
+                <a class="dropdown-item" href="/appointment-list">Appointments</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            <% } %>
+
+          </li>
 
         <% } else { %>
-            <a href="/user">Profile</a>
-            <span> | </span>
-            <a href="/appointment-list">Appointments</a>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+
         <% } %>
 
-        <span> | </span>
-        <a href="/logout">Logout</a>
-        <span>]</span>
-
-    <% } else { %>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-    <% } %>
-</div>
+      </ul>
+    </div>  
+  </div>
+</nav>

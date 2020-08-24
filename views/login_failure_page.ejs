@@ -8,21 +8,18 @@
   </head>
 
   <body>
+    <%- include('section/header'); %>
+
     <div class="container">
-
-      <%- include('section/header'); %>
-
       <div id="page">
         <h2>User Login Failed!</h2>
         <span><%= login_failure_reason %></span>
       </div>
-
-      <%- include('section/footer'); %>
-
     </div>
 
+    <%- include('section/footer'); %>
+
     <!-- Static -->
-    <script src="/static/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
 
