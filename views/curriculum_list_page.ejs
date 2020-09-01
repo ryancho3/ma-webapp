@@ -11,25 +11,39 @@
     <%- include('section/header'); %>
 
     <div class="container">
-      <div id="page">
-        <h2>Curriculum List</h2>
-          <ul>
+      <div class="row mt-3">
+        <div class="col">
+          <h2>Curriculum List</h2>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col">
+          <ul class="list-group">
             <% for(var i=0; i<curriculumModels.length; i++) { %>
               <% var curriculumModel = curriculumModels[i]; %>
-              <li><a href="/curriculum-view?curriculum_id=<%= curriculumModel.getId() %>"><%= curriculumModel.getName() %></a></li>
-              <% if (sessionModel.isUserAdmin()) { %>
-                <form action="/curriculum-remove" method="post">
-                  <input type="hidden" name="curriculum_id" value="<%= curriculumModel.getId() %>"/>
-                  <input type="submit" value="Remove"/>
-                </form>
-              <% } %>
+
+              <li class="list-group-item">
+                <a href="/curriculum-view?curriculum_id=<%= curriculumModel.getId() %>"><%= curriculumModel.getName() %></a>
+                <% if (sessionModel.isUserAdmin()) { %>
+                  <form action="/curriculum-remove" method="post">
+                    <input type="hidden" name="curriculum_id" value="<%= curriculumModel.getId() %>"/>
+                    <input type="submit" value="Remove"/>
+                  </form>
+                <% } %>
+              </li>
             <% } %>
           </ul>
+        </div>
       </div>
 
       <% if (sessionModel.isUserAdmin()) { %>
-      <a href="/curriculum-create">Add New Curriculum</a>
+        <div class="row mt-3">
+          <div class="col">
+            <a href="/curriculum-create" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add a new curriculum</a>
+          </div>
+        </div>
       <% } %>
+
     </div>
 
     <%- include('section/footer'); %>

@@ -20,22 +20,28 @@ $ cd mf-webapp
 
 // 3. Install dependency
 $ npm install // install nodejs dependency
+
+// 4. Install Test depedency
+$ npm install --global mocha
 ```
 
 ## Develop
 
-Locally run the webapp to develop and test
+Basic development flow
 
 ```
 // 1. Make code changes
 ...
 
-// 2. Run locally
+// 2. Run Unit Test
+$ npm test
+
+// 3. Run Webapp locally
 $ npm start
 
-// 3. Test by opening browser: http://127.0.0.1:3000/
+// 4. Test by opening browser: http://127.0.0.1:3000/
 
-// 4. Commit & push changes to repository
+// 5. Commit & push changes to repository
 $ git add .
 $ git commit -m 'some message'
 $ git push
