@@ -21,7 +21,7 @@
 
         <div class="row">
           <% if (typeof sessionModel != "undefined" && sessionModel.isLoggedIn() && sessionModel.isUserAdmin()) { %>
-          <div class="card">
+          <div class="card col-sm-12">
             <div class="card-body">As admin, you can see all active appointments</div>
           </div>
           <% } %>
