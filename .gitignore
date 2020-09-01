@@ -4,3 +4,4 @@
 node_modules/
 mf-webapp.zip
 *.zip
+.elasticbeanstalk/config.yml
