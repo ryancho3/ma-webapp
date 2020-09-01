@@ -118,9 +118,7 @@ UserService.prototype.loadUserByEmail = function(input, callback) {
         }
         
         if (data.Items.length === 0) {
-            return callback(null, {
-                'noItem' : true
-            });
+            return callback(null, {});
         }
 
         var ddbItem = data.Items[0];
@@ -128,9 +126,25 @@ UserService.prototype.loadUserByEmail = function(input, callback) {
 
         return callback(null, {
             'userItem': userItem,
-            'noItem' : false
         });
     });
+}
+
+UserService.prototype.changePassword = function(input, callback) {
+    
+    var inputUserId = input.user_id;
+    var passwordSha256 = stringUtil.parseSha256String(input.password);
+    var ddbParams = {
+        'TableName': this.ddbUserTable,
+        'Key': {'user_id': {'S': inputUserId}},
+        UpdateExpression: "set password_sha256 = :password",
+        ExpressionAttributeValues:{
+
+            ":password":passwordSha256
+    
+        },
+        ReturnValues:"UPDATED_NEW"
+    }
 }
 
 // EXPORT
