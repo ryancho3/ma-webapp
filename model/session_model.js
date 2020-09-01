@@ -20,7 +20,15 @@ SessionModel.prototype.setUserItem = function(userItem) {
 
 SessionModel.prototype.isLoggedIn = function() {
 
-    return (this.sessionItem && this.userItem);
+    if (!this.userItem) {
+        return false;
+    }
+
+    if (!this.sessionItem) {
+        return false;
+    }
+
+    return true;
 }
 
 SessionModel.prototype.isUserAdmin = function() {
