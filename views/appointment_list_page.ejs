@@ -11,8 +11,22 @@
     <%- include('section/header'); %>
 
     <div class="container">
+
+
       <div id="page">
-        <h2>Appointments</h2>
+
+        <div class="row">
+          <h2>Appointments</h2>
+        </div>
+
+        <div class="row">
+          <% if (typeof sessionModel != "undefined" && sessionModel.isLoggedIn() && sessionModel.isUserAdmin()) { %>
+          <div class="card">
+            <div class="card-body">As admin, you can see all active appointments</div>
+          </div>
+          <% } %>
+        </div>
+
         <% appointmentModels.forEach(function(appointmentModel) { %>
 
           <ul>
