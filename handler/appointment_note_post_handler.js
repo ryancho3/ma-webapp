@@ -1,7 +1,6 @@
 
 // DEPENDENCY
 var appointmentService = require('../service/appointment_service.js');
-const session = require('../middleware/session.js');
 
 module.exports = function(req, res) {
 
