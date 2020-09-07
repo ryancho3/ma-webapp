@@ -143,8 +143,14 @@ UserService.prototype.changePassword = function(input, callback) {
             ":password":passwordSha256
     
         },
-        ReturnValues:"UPDATED_NEW"
+        ReturnValues:"ALL_NEW"
     }
+    this.ddbClient.update(params, function(err, data) {
+        if (err) {
+            callback(err);
+            return;
+        }
+    });
 }
 
 // EXPORT

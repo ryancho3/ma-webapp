@@ -8,7 +8,9 @@ var userService = require('../service/user_service.js');
 module.exports = function(apiInput, apiCallback) {
 
     var result = {
-        'userItem' : null
+        'userItem' : null,
+        'userCreated' : false,
+        'inputErrorCode' : null
     }
     var password = apiInput.password;
     var repeatedPassword = apiInput.repeat;
@@ -21,8 +23,8 @@ module.exports = function(apiInput, apiCallback) {
                     return apiCallback(err);
                 }
                 var userItem = output['userItem'];
-                console.log(userItem);
                 if (userItem) {
+                    result['inputErrorCode'] = 'ERR_DUPLICATE_EMAIL';
                     return next(new Error('Duplicate Email'));
                 }
                 return next();
@@ -32,9 +34,11 @@ module.exports = function(apiInput, apiCallback) {
         function checkPassword(next) {
             
             if (password.length == 0) {
+                result['inputErrorCode'] = 'ERR_NO_PASSWORD_ENTERED';
                 return next(new Error('Enter a password'));
             }
             if (password.length < 8) {
+                result['inputErrorCode'] = 'ERR_PASSWORD_LENGTH';
                 return next(new Error('Password must be at least 8 characters'));
             }
             return next();
@@ -42,6 +46,7 @@ module.exports = function(apiInput, apiCallback) {
 
         function checkRepeatedPassword(next) {
             if (password.valueOf() != repeatedPassword.valueOf()) {
+                result['inputErrorCode'] = 'ERR_PASSWORD_REPEAT';
                 return next(new Error('Passwords do not match'));
             }
             return next();
@@ -62,7 +67,7 @@ module.exports = function(apiInput, apiCallback) {
         }
     ], function(err) {
         if (err) {
-            return apiCallback(err);
+            return apiCallback(err, result);
         }
 
         return apiCallback(null, result);

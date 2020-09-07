@@ -15,9 +15,9 @@
       <div id="page">
         <h2>Availability list (start:<%= weekStartYYYYMMDD %>, end:<%= weekEndYYYYMMDD %>) </h2>
 
-        <% for (var yyyymmdd=weekStartYYYYMMDD; yyyymmdd<=weekEndYYYYMMDD; yyyymmdd++) { %>
+        <% for (var j = 0; j < weekdaysYYYYMMDD.length; j++) { %>
 
-          <% var availableHourList = dateToAvailableHourListMap[yyyymmdd];
+          <% var availableHourList = dateToAvailableHourListMap[weekdaysYYYYMMDD[j]];
              if (!availableHourList) {
               availableHourList = [];
              }
@@ -25,10 +25,10 @@
 
           <div style="width:120px; float:left;">
 
-            <h3><%= yyyymmdd %></h3>
+            <h3><%= weekdaysYYYYMMDD[j] %></h3>
 
             <form action="/tutor-availability-update-post" method="post">
-              <input type="hidden" name="yyyymmdd" value="<%= yyyymmdd %>"/>
+              <input type="hidden" name="yyyymmdd" value="<%= weekdaysYYYYMMDD[j] %>"/>
               <% for (var i=0; i<24; i++) { %>
 
                 <% if (availableHourList.includes(i)) { %>

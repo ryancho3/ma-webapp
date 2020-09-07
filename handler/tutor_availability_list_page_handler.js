@@ -2,6 +2,7 @@
 // DEPENDENCY
 var async = require('async');
 var stringUtil = require('../util/string_util.js');
+var dateUtil = require('../util/date_util.js');
 var tutorService = require('../service/tutor_service.js');
 var curriculumService = require('../service/curriculum_service.js');
 const session = require('../middleware/session.js');
@@ -20,13 +21,17 @@ module.exports = function(req, res) {
     var todayDate = new Date();
     var weekStartDate = new Date();
     var weekEndDate = new Date();
-
+    
     weekStartDate.setDate(todayDate.getDate() - todayDate.getDay());
     weekEndDate.setDate(todayDate.getDate() - todayDate.getDay() + 7);
 
     var todayYYYYMMDD = stringUtil.parseYYYYMMDDIntFromDate(todayDate);
     var weekStartYYYYMMDD = stringUtil.parseYYYYMMDDIntFromDate(weekStartDate);
     var weekEndYYYYMMDD = stringUtil.parseYYYYMMDDIntFromDate(weekEndDate);
+    var weekdaysYYYYMMDD = [];
+    for (var i = weekStartYYYYMMDD; i<weekStartYYYYMMDD+7; i++) {
+        weekdaysYYYYMMDD.push(dateUtil.verifyYYYYMMDD(i));
+    }
 
     var sessionUserId = sessionModel.getSessionUserId();
     var inputStartYYYYMMDD = weekStartYYYYMMDD;
@@ -59,6 +64,7 @@ module.exports = function(req, res) {
             'todayYYYYMMDD': todayYYYYMMDD,
             'weekStartYYYYMMDD': weekStartYYYYMMDD,
             'weekEndYYYYMMDD': weekEndYYYYMMDD,
+            'weekdaysYYYYMMDD': weekdaysYYYYMMDD,
             'dateToAvailableHourListMap': dateToAvailableHourListMap
             //'tutor_availability': result.dateToAvailabilityList
         });

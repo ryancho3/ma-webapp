@@ -114,6 +114,52 @@ function parseFullDayStringFromYYYYMMDD(yyyymmdd) {
     return dayStrings[dayInt];
 }
 
+function parseDisplayStringFromYYYYMMDD(yyyymmdd) {
+    var yyyymmddString = "" + yyyymmdd; // force it to be string (in case it's a number)
+
+    // validate
+    if (yyyymmddString.length !== 8) {
+        return null;
+    }
+
+    var stringYYYY = str.substring(0, 4);
+    var stringMM = str.substring(4, 6);
+    var stringDD = str.substring(6, 8);
+
+    var intYYYY = parseInt(stringYYYY);
+    var intMM = parseInt(stringMM);
+    var intDD = parseInt(stringDD);
+
+    var date = new Date(intYYYY, (intMM - 1), intDD, 0, 0, 0, 0);
+    return date;
+}
+
+function parseYYYYMMDDHHStringFromYYYYMMDDAndHour(yyyymmdd, hour) {
+
+    var stringYYYYMMDD = "" + yyyymmdd;
+    var stringHH = "" + hour;
+
+    if (stringHH.length != 2) {
+        stringHH = "0" + stringHH;
+    }
+
+    return stringYYYYMMDD + "" + stringHH;
+}
+
+function parseShortDayStringFromYYYYMMDD(yyyymmdd) {
+
+    if (!yyyymmdd) {
+        return null;
+    }
+
+    var stringYYYY = yyyymmdd.substring(0, 4);
+    var stringMM = yyyymmdd.substring(4, 6);
+    var stringDD = yyyymmdd.substring(6, 8);
+
+    return (stringYYYY + "/" + stringMM + "/" + stringDD);
+}
+
+
 // EXPORTS
 module.exports.generateUUIDString = generateUUIDString;
 module.exports.toLowercaseString = toLowercaseString;

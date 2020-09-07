@@ -36,6 +36,10 @@ module.exports = function(req, res) {
                 }
                 */
                 userItem = output.userItem;
+                if (!userItem) {
+                    next(new Error("userItem not set"));
+                }
+                
                 return next();
             });
         },
