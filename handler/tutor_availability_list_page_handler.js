@@ -5,7 +5,6 @@ var stringUtil = require('../util/string_util.js');
 var dateUtil = require('../util/date_util.js');
 var tutorService = require('../service/tutor_service.js');
 var curriculumService = require('../service/curriculum_service.js');
-const session = require('../middleware/session.js');
 
 // HANDLER
 module.exports = function(req, res) {

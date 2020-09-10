@@ -30,7 +30,8 @@ if (cluster.isMaster) {
     var bodyParser = require('body-parser');
     var cookieParser = require('cookie-parser')
 
-    var sessionMiddleware = require('./middleware/session.js');
+    var httpsRedirectMiddleware = require('./middleware/https_redirect_middleware.js');
+    var sessionMiddleware = require('./middleware/session_middleware.js');
 
     var homePageHandler = require('./handler/home_page_handler.js');
     var userPageHandler = require('./handler/user_page_handler.js');
@@ -64,6 +65,7 @@ if (cluster.isMaster) {
     app.use('/static', express.static('static'))
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended:false}));
+    app.use(httpsRedirectMiddleware);
     app.use(sessionMiddleware);
 
     //-- APP HANDLERS --//
