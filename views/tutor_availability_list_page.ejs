@@ -1,64 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('section/head_common') %>
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Matchbook Foundation: Curriculum List</title>
-  </head>
 
-  <body>
-    <%- include('section/header'); %>
+<head>
+  <%- include('section/head_common') %>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Matchbook Foundation: Curriculum List</title>
+</head>
 
-    <div class="container">
+<body>
+  <%- include('section/header'); %>
+  <div class="container">
 
-      <div id="page">
-        <h2>Availability list (start:<%= weekStartYYYYMMDD %>, end:<%= weekEndYYYYMMDD %>) </h2>
+
+    <div id="page">
+      <h2>Availability list (start:<%= displayYYYYMMDD[0] %>, end:<%= displayYYYYMMDD[6] %>) </h2>
+      <div class="row">
 
         <% for (var j = 0; j < weekdaysYYYYMMDD.length; j++) { %>
-
+        <div class="col">
           <% var availableHourList = dateToAvailableHourListMap[weekdaysYYYYMMDD[j]];
              if (!availableHourList) {
               availableHourList = [];
              }
           %>
 
-          <div style="width:120px; float:left;">
 
-            <h3><%= weekdaysYYYYMMDD[j] %></h3>
+          <h3><%= displayYYYYMMDD[j] %></h3>
 
-            <form action="/tutor-availability-update-post" method="post">
-              <input type="hidden" name="yyyymmdd" value="<%= weekdaysYYYYMMDD[j] %>"/>
+          <form action="/tutor-availability-update-post" method="post">
+            <input type="hidden" name="yyyymmdd" value="<%= weekdaysYYYYMMDD[j] %>" />
+            <div class="btn-group-vertical" data-toggle="buttons">
               <% for (var i=0; i<24; i++) { %>
 
-                <% if (availableHourList.includes(i)) { %>
-                  <input type="checkbox" name="hour" value="<%= i %>" checked>
-                <% } else { %>
-                  <input type="checkbox" name="hour" value="<%= i %>">
-                <% } %>
-
-                <label for="<%= i %>"><%= i %>:00 - <%= i+1 %>:00</label>
-                <br/>
+              <% if (availableHourList.includes(i)) { %>
+                <span class="btn btn-secondary active">
+                  <input type="checkbox" name="hour" value="<%= i %>" checked> <%= i %>:00-<%= i+1 %>:00
+                </span>
+              <% } else { %>
+                <span class="btn btn-secondary">
+                  <input type="checkbox" name="hour" value="<%= i %>"> <%= i %>:00-<%= i+1 %>:00
+                </span>
               <% } %>
-              <input type="submit" value="Update"/>
-            </form>
-          </div>
+              <% } %>
+              <input class="btn btn-primary" type="submit" value="Update">
+            </div>
+        </div>
+        </form>
 
         <% } %>
-
-        <div style="clear:both">&nbsp;</div>
-
       </div>
+
     </div>
+  </div>
 
-    <%- include('section/footer'); %>
+  <%- include('section/footer'); %>
 
-    <!-- Static -->
-    <script type="text/javascript">
-    $(document).ready(function() {
+  <!-- Static -->
+  <script type="text/javascript">
+    $(document).ready(function () {
 
     })
-    </script>
-  </body>
-</html>
+  </script>
+</body>
 
+</html>

@@ -28,9 +28,16 @@ module.exports = function(req, res) {
     var weekStartYYYYMMDD = stringUtil.parseYYYYMMDDIntFromDate(weekStartDate);
     var weekEndYYYYMMDD = stringUtil.parseYYYYMMDDIntFromDate(weekEndDate);
     var weekdaysYYYYMMDD = [];
+    var displayYYYYMMDD = [];
     for (var i = weekStartYYYYMMDD; i<weekStartYYYYMMDD+7; i++) {
         weekdaysYYYYMMDD.push(dateUtil.verifyYYYYMMDD(i));
     }
+
+    for (var i = 0; i<weekdaysYYYYMMDD.length; i++) {
+        displayYYYYMMDD.push(stringUtil.parseDisplayStringFromYYYYMMDD(weekdaysYYYYMMDD[i]));
+    }
+
+    console.log(displayYYYYMMDD);
 
     var sessionUserId = sessionModel.getSessionUserId();
     var inputStartYYYYMMDD = weekStartYYYYMMDD;
@@ -64,6 +71,7 @@ module.exports = function(req, res) {
             'weekStartYYYYMMDD': weekStartYYYYMMDD,
             'weekEndYYYYMMDD': weekEndYYYYMMDD,
             'weekdaysYYYYMMDD': weekdaysYYYYMMDD,
+            'displayYYYYMMDD' : displayYYYYMMDD,
             'dateToAvailableHourListMap': dateToAvailableHourListMap
             //'tutor_availability': result.dateToAvailabilityList
         });

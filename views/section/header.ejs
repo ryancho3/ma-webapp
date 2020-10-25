@@ -9,10 +9,10 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link" href="/">Home | 홈</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/curriculum-list">Curriculums</a>
+          <a class="nav-link" href="/curriculum-list">Curriculums | 과목</a>
         </li>
 
         <% if (typeof sessionModel != "undefined" && sessionModel.isLoggedIn()) { %>
@@ -24,21 +24,21 @@
 
             <% if (sessionModel.isUserTutor()) { %>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/user">Profile</a>
-                <a class="dropdown-item" href="/appointment-list">Appointments</a>
-                <a class="dropdown-item" href="/tutor-curriculum-list">Manage Curriculums</a>
-                <a class="dropdown-item" href="/tutor-availability-list">Manage Availability</a>
+                <a class="dropdown-item" href="/user">Profile | 프로필</a>
+                <a class="dropdown-item" href="/appointment-list">Appointments | 내 수업</a>
+                <a class="dropdown-item" href="/tutor-curriculum-list">Manage Curriculums | 내 과목</a>
+                <a class="dropdown-item" href="/tutor-availability-list">Manage Availability | 가능한 시간</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/logout">Logout</a>
+                <a class="dropdown-item" href="/logout">Logout | 로그아웃</a>
               </div>
 
             <% } else { %>
 
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/user">Profile</a>
-                <a class="dropdown-item" href="/appointment-list">Appointments</a>
+                <a class="dropdown-item" href="/user">Profile | 프로필</a>
+                <a class="dropdown-item" href="/appointment-list">Appointments | 내 수업</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/logout">Logout</a>
+                <a class="dropdown-item" href="/logout">Logout | 로그아웃</a>
               </div>
             <% } %>
 
@@ -47,10 +47,10 @@
         <% } else { %>
 
           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/login">Login | 로그인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
+            <a class="nav-link" href="/register">Register 계정 | 만들기</a>
           </li>
 
         <% } %>

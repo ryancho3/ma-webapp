@@ -115,23 +115,16 @@ function parseFullDayStringFromYYYYMMDD(yyyymmdd) {
 }
 
 function parseDisplayStringFromYYYYMMDD(yyyymmdd) {
-    var yyyymmddString = "" + yyyymmdd; // force it to be string (in case it's a number)
-
-    // validate
-    if (yyyymmddString.length !== 8) {
+    if (!yyyymmdd) {
         return null;
     }
+    var yyyymmddString = "" + yyyymmdd; // force it to be string (in case it's a number)
 
-    var stringYYYY = str.substring(0, 4);
-    var stringMM = str.substring(4, 6);
-    var stringDD = str.substring(6, 8);
+    var stringYYYY = yyyymmddString.substring(0, 4);
+    var stringMM = yyyymmddString.substring(4, 6);
+    var stringDD = yyyymmddString.substring(6, 8);
 
-    var intYYYY = parseInt(stringYYYY);
-    var intMM = parseInt(stringMM);
-    var intDD = parseInt(stringDD);
-
-    var date = new Date(intYYYY, (intMM - 1), intDD, 0, 0, 0, 0);
-    return date;
+    return (stringYYYY + "/" + stringMM + "/" + stringDD);
 }
 
 function parseYYYYMMDDHHStringFromYYYYMMDDAndHour(yyyymmdd, hour) {
@@ -146,18 +139,6 @@ function parseYYYYMMDDHHStringFromYYYYMMDDAndHour(yyyymmdd, hour) {
     return stringYYYYMMDD + "" + stringHH;
 }
 
-function parseShortDayStringFromYYYYMMDD(yyyymmdd) {
-
-    if (!yyyymmdd) {
-        return null;
-    }
-
-    var stringYYYY = yyyymmdd.substring(0, 4);
-    var stringMM = yyyymmdd.substring(4, 6);
-    var stringDD = yyyymmdd.substring(6, 8);
-
-    return (stringYYYY + "/" + stringMM + "/" + stringDD);
-}
 
 
 // EXPORTS
@@ -170,3 +151,4 @@ module.exports.parseDateFromYYYYMMDD = parseDateFromYYYYMMDD;
 module.exports.parseYYYYMMDDHHStringFromYYYYMMDDAndHour = parseYYYYMMDDHHStringFromYYYYMMDDAndHour;
 module.exports.parseShortDayStringFromYYYYMMDD = parseShortDayStringFromYYYYMMDD;
 module.exports.parseFullDayStringFromYYYYMMDD = parseFullDayStringFromYYYYMMDD;
+module.exports.parseDisplayStringFromYYYYMMDD = parseDisplayStringFromYYYYMMDD;
