@@ -10,7 +10,7 @@ module.exports = function(req, res) {
 
     if (sessionModel.isLoggedIn() === false) {
         // TODO: figure out the right way to do this 
-        return res.redirect('/register');
+        return res.redirect('/locked');
     }
 
     curriculumService.listCurriculum(function(err, output) {
