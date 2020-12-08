@@ -32,7 +32,7 @@
                 <a class="dropdown-item" href="/logout">Logout | 로그아웃</a>
               </div>
 
-            <% } else { %>
+            <% } else if (sessionModel.isUserStudent()) { %>
 
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/user">Profile | 프로필</a>
@@ -40,8 +40,15 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout">Logout | 로그아웃</a>
               </div>
+            <% } else if (sessionModel.isUserAdmin()) { %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/user">Profile | 프로필</a>
+                <a class="dropdown-item" href="/appointment-list">Appointments | 수업</a>
+                <a class="dropdown-item" href="/manualcreation">Manual Account Creation</a>
+                <div class="dropdown-divider"></div>  
+                <a class="dropdown-item" href="/logout">Logout | 로그아웃</a>
+              </div>
             <% } %>
-
           </li>
 
         <% } else { %>
@@ -50,7 +57,7 @@
             <a class="nav-link" href="/login">Login | 로그인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/register">Register 계정 | 만들기</a>
+            <a class="nav-link" href="/locked">Register | 계정 만들기</a>
           </li>
 
         <% } %>

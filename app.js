@@ -56,6 +56,9 @@ if (cluster.isMaster) {
     var appointmentCreatePostHandler  = require('./handler/appointment_create_post_handler.js');
     var appointmentNotePostHandler    = require('./handler/appointment_note_post_handler.js');
     var appointmentArchivePostHandler = require('./handler/appointment_archive_post_handler.js');
+    var lockedPageHandler = require('./handler/locked_page_handler.js');
+    var accCreationPageHandler = require('./handler/acc_creation_page_handler.js');
+    var accCreationPostHandler = require('./handler/acc_creation_post_handler.js');
 
     //-- APP SETUP --//
 
@@ -93,6 +96,9 @@ if (cluster.isMaster) {
     app.post('/appointment-create'  , appointmentCreatePostHandler);
     app.post('/appointment-note'    , appointmentNotePostHandler);
     app.post('/appointment-archive' , appointmentArchivePostHandler);
+    app.get ('/locked', lockedPageHandler);
+    app.get ('/manualcreation', accCreationPageHandler);
+    app.post('/manualcreation', accCreationPostHandler);
 
     //-- APP START --//
 

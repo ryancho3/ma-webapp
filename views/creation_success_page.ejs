@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('section/head_common') %>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Matchbook Foundation</title>
+  </head>
+
+  <body>
+    <%- include('section/header'); %>
+
+    <div class="container">
+      <div id="page">
+        <h2>User Creation Successful</h2>
+        <div>
+            <strong>Name: </strong>
+            <span><%= sessionModel.getUserName() %></span>
+        </div>
+        <div>
+            <strong>Email: </strong>
+            <span><%= sessionModel.getUserEmail() %></span>
+        </div>
+        <div>
+            <strong>Temporary Password: </strong>
+            <span><%= tempPass %></span>
+        </div>
+      </div>
+    </div>
+
+    <%- include('section/footer'); %>
+
+    <!-- Static -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
