@@ -59,6 +59,8 @@ if (cluster.isMaster) {
     var lockedPageHandler = require('./handler/locked_page_handler.js');
     var accCreationPageHandler = require('./handler/acc_creation_page_handler.js');
     var accCreationPostHandler = require('./handler/acc_creation_post_handler.js');
+    var adminCreationPageHandler = require('./handler/admin_creation_page_handler.js');
+    var adminCreationPostHandler = require('./handler/admin_creation_post_handler.js');
 
     //-- APP SETUP --//
 
@@ -99,6 +101,8 @@ if (cluster.isMaster) {
     app.get ('/locked', lockedPageHandler);
     app.get ('/manualcreation', accCreationPageHandler);
     app.post('/manualcreation', accCreationPostHandler);
+    app.get ('/newadmin', adminCreationPageHandler);
+    app.post('/newadmin', adminCreationPostHandler);
 
     //-- APP START --//
 
