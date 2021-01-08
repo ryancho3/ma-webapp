@@ -61,6 +61,8 @@ if (cluster.isMaster) {
     var accCreationPostHandler = require('./handler/acc_creation_post_handler.js');
     var adminCreationPageHandler = require('./handler/admin_creation_page_handler.js');
     var adminCreationPostHandler = require('./handler/admin_creation_post_handler.js');
+    var pwdResetPageHandler = require('./handler/pwd_reset_page_handler.js');
+    var pwdResetPostHandler = require('./handler/pwd_reset_post_handler.js')
 
     //-- APP SETUP --//
 
@@ -103,6 +105,8 @@ if (cluster.isMaster) {
     app.post('/manualcreation', accCreationPostHandler);
     app.get ('/newadmin', adminCreationPageHandler);
     app.post('/newadmin', adminCreationPostHandler);
+    app.get ('/resetpassword', pwdResetPageHandler);
+    app.post('/resetpassword', pwdResetPostHandler);
 
     //-- APP START --//
 

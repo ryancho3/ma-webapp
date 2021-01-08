@@ -2,7 +2,9 @@
 // DEPENDENCY
 var async = require('async');
 var userUtil = require('../util/user_util.js');
+var stringUtil = require('../util/string_util.js');
 var dynamodb = require("../client/dynamodb.js");
+
 
 // CLASS
 function UserService () {
@@ -145,7 +147,7 @@ UserService.prototype.changePassword = function(input, callback) {
         },
         ReturnValues:"ALL_NEW"
     }
-    this.ddbClient.update(params, function(err, data) {
+    this.ddbClient.update(ddbParams, function(err, data) {
         if (err) {
             callback(err);
             return;
