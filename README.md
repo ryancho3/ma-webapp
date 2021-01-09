@@ -1,4 +1,4 @@
-# Matchbook Foundation
+# Matchbook Academy Web App
 
 ## Setup
 
