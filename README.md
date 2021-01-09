@@ -16,7 +16,7 @@ Setup development environment on your computer
 $ git clone https://github.com/matchbookfoundationdev/ma-webapp.git
 
 // 2. Go into the repository root
-$ cd mf-webapp
+$ cd ma-webapp
 
 // 3. Install dependency
 $ npm install // install nodejs dependency
@@ -55,7 +55,7 @@ Deploy latest change to AWS environment
 // 1. Create archive
 $ npm run archive
 
-// 2. upload 'ma-webapp.zip' to beanstalk
+// 2. upload 'ma-webapp.zip' to AWS Elastic Beanstalk
 ```
 
 ## Reference
