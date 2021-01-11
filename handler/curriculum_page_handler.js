@@ -73,7 +73,7 @@ module.exports = function(req, res) {
             'sessionModel': req.sessionModel,
             'curriculumId': input.curriculum_id,
             'curriculumInfo': result['curriculumInfo'],
-            'curriculumAvailability': result['curriculumAvailability']
+            'curriculumAvailability': result['curriculumAvailability'],
         });
     })
 }

@@ -25,7 +25,7 @@ if (cluster.isMaster) {
 } else {
 
     //-- DEPENDENCY --//
-
+    const path = require('path');
     var express = require('express');
     var bodyParser = require('body-parser');
     var cookieParser = require('cookie-parser')
@@ -70,6 +70,7 @@ if (cluster.isMaster) {
     app.set('view engine', 'ejs');
     app.set('views', __dirname + '/views');
     app.use('/static', express.static('static'))
+    app.use('/content', express.static(path.join(__dirname, './content')));
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended:false}));
     app.use(httpsRedirectMiddleware);

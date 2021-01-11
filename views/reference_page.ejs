@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('section/head_common') %>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>References</title>
+  </head>
+
+  <body>
+    <%- include('section/header'); %>
+
+    <div class="container">
+      <div id="page">
+        <h2>Curriculum Details</h2>
+        <div>
+            <strong>Name: </strong>
+            <span><%= userItem['name'] %></span>
+        </div>
+        <div>
+            <strong>Email: </strong>
+            <span><%= userItem['email_lowercase'] %></span>
+        </div>
+        <div>
+            <strong>Profile: </strong>
+            <span><%= userItem['profile'] %></span>
+        </div>
+      </div>
+    </div>
+
+    <%- include('section/footer'); %>
+
+    <!-- Static -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
+
