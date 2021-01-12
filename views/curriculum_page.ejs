@@ -4,7 +4,7 @@
     <%- include('section/head_common') %>
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Matchbook Foundation: Curriculum</title>
+    <title><%= curriculumInfo['name'] %> - Matchbook Academy</title>
   </head>
 
   <body>
@@ -12,11 +12,7 @@
 
     <div class="container">
       <div id="page">
-        <h2>Curriculum</h2>
-        <div>
-            <strong>Name: </strong>
-            <span><%= curriculumInfo['name'] %></span>
-        </div>
+        <h2><%= curriculumInfo['name'] %></h2>
         <div>
             <strong>Description: </strong>
             <span><%= curriculumInfo['description'] %></span>

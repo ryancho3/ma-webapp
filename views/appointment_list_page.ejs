@@ -4,7 +4,7 @@
     <%- include('section/head_common') %>
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Matchbook Foundation: Curriculum List</title>
+    <title>List of Appointments (Admin)</title>
   </head>
 
   <body>
@@ -22,7 +22,7 @@
         <div class="row">
           <% if (typeof sessionModel != "undefined" && sessionModel.isLoggedIn() && sessionModel.isUserAdmin()) { %>
           <div class="card col-sm-12">
-            <div class="card-body">As admin, you can see all active appointments</div>
+            <div class="card-body">As an admin, you can view all active appointments.</div>
           </div>
           <% } %>
         </div>
