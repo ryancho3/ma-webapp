@@ -3,15 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "ejs": "latest",
-    "aws-sdk": "latest",
-    "express": "latest",
-    "body-parser": "latest",
-    "uuid": "latest",
-    "crypto": "latest",
-    "cookie-parser": "latest",
     "async": "latest",
-    "dateformat": "latest"
+    "aws-sdk": "latest",
+    "body-parser": "latest",
+    "bootstrap": "^5.0.0-beta1",
+    "cookie-parser": "latest",
+    "crypto": "latest",
+    "dateformat": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "uuid": "latest"
   },
   "scripts": {
     "start": "node app.js",
