@@ -6,6 +6,7 @@ var stringUtil = require('../util/string_util.js');
 var dynamodb = require("../client/dynamodb.js");
 
 
+
 // CLASS
 function UserService () {
     
@@ -98,7 +99,7 @@ UserService.prototype.loadUserInBatch = function(input, callback) {
     })
 }
 
-UserService.prototype.loadUserByEmail = function(input, callback) {
+UserService.prototype.loadUserByEmail = function(input, callback) { 
 
     var inputEmail = input.email;
     var email_lowercase = inputEmail.toLowerCase();
@@ -139,20 +140,41 @@ UserService.prototype.changePassword = function(input, callback) {
     var ddbParams = {
         'TableName': this.ddbUserTable,
         'Key': {'user_id': {'S': inputUserId}},
-        UpdateExpression: "set password_sha256 = :password",
-        ExpressionAttributeValues:{
-
-            ":password":passwordSha256
-    
-        },
-        ReturnValues:"ALL_NEW"
-    }
-    this.ddbClient.update(ddbParams, function(err, data) {
+        'ExpressionAttributeNames': {"#P" : "password_sha256"},
+        'ExpressionAttributeValues': {":p": {'S' : passwordSha256}},
+        'UpdateExpression' : "SET #P = :p",
+        'ReturnValues' : "ALL_NEW"
+       };
+    this.ddbClient.updateItem(ddbParams, function(err, data) {
         if (err) {
             callback(err);
             return;
         }
+        
+        return callback(null, null);
     });
+}
+
+UserService.prototype.updateProfile = function(input, callback) {
+    
+    var inputUserId = input.user_id;
+    var profile = input.profile;
+    var ddbParams = {
+        'TableName': this.ddbUserTable,
+        'Key': {'user_id': {'S': inputUserId}},
+        'ExpressionAttributeNames': {"#Profile" : "profile"},
+        'ExpressionAttributeValues': {":profile": {'S' : profile}},
+        'UpdateExpression' : "SET #Profile = :profile",
+        'ReturnValues' : "ALL_NEW"
+       };
+    this.ddbClient.updateItem(ddbParams, function(err, data) {
+        if (err) {
+            callback(err);
+            return;
+        }
+        
+        return callback(null, null);
+    })
 }
 
 // EXPORT

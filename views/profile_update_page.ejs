@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('section/head_common') %>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Update Your Profile - Matchbook Academy</title>
+  </head>
+
+  <body>
+    <%- include('section/header'); %>
+
+    <div class="container">
+      <div id="page">
+
+        <h2>Update Your Profile</h2>
+
+        <form action="/updateprofile" method="post">
+          <div class="form-group">
+            <label for="name">New Profile</label>
+            <textarea type="text" name="profile" class="form-control">
+<%= userItem['profile'] %>
+            </textarea>
+          </div>
+          <button type="submit" value="Update" class="btn btn-primary">Update</button>
+        </form>
+      </div>
+    </div>
+
+    <%- include('section/footer'); %>
+
+    <!-- Static -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    })
+    </script>
+  </body>
+</html>
+

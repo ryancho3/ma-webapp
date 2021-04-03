@@ -8,19 +8,17 @@ var userService = require('../service/user_service.js');
 module.exports = function(req, res) {
 
     var input = {};
-    input.password = req.body.password;
-    input.repeatpassword = req.body.repeat_password;
+    input.profile = req.body.profile;
     input.user_id = req.sessionModel.getSessionUserId();
 
-    var userItem;
 
-    userService.changePassword(input, function(err, output) {
+    userService.updateProfile(input, function(err, output) {
         if (err) {
             res.render('error_page', {});
             return;
         }
 
-        res.render('pwd_reset_success_page', {
+        res.render('profile_update_success_page', {
             'sessionModel': req.sessionModel,
         });
     })

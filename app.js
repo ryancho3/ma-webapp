@@ -1,5 +1,6 @@
 // Include the cluster module
 var cluster = require('cluster');
+const { profile } = require('console');
 
 // Code to run if we're in the master process
 if (cluster.isMaster) {
@@ -62,7 +63,9 @@ if (cluster.isMaster) {
     var adminCreationPageHandler = require('./handler/admin_creation_page_handler.js');
     var adminCreationPostHandler = require('./handler/admin_creation_post_handler.js');
     var pwdResetPageHandler = require('./handler/pwd_reset_page_handler.js');
-    var pwdResetPostHandler = require('./handler/pwd_reset_post_handler.js')
+    var pwdResetPostHandler = require('./handler/pwd_reset_post_handler.js');
+    var profileUpdatePageHandler = require('./handler/profile_update_page_handler.js');
+    var profileUpdatePostHandler = require('./handler/profile_update_post_handler.js')
 
     //-- APP SETUP --//
 
@@ -108,6 +111,8 @@ if (cluster.isMaster) {
     app.post('/newadmin', adminCreationPostHandler);
     app.get ('/resetpassword', pwdResetPageHandler);
     app.post('/resetpassword', pwdResetPostHandler);
+    app.get ('/updateprofile', profileUpdatePageHandler);
+    app.post('/updateprofile', profileUpdatePostHandler);
 
     //-- APP START --//
 

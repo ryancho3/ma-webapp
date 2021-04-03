@@ -29,6 +29,9 @@
                 <a class="dropdown-item" href="/tutor-curriculum-list">Manage My Curriculum | 내 과목</a>
                 <a class="dropdown-item" href="/tutor-availability-list">Manage Availability | 가능한 시간</a>
                 <div class="dropdown-divider"></div>
+                <h1 class="dropdown-header">Account Settings</h1>
+                <a class="dropdown-item" href="/updateprofile">Update Profile | 프로필 변경</a>
+                <a class="dropdown-item" href="/resetpassword">Change Password | 비밀번호 변경</a>
                 <a class="dropdown-item" href="/logout">Logout | 로그아웃</a>
               </div>
 
@@ -38,14 +41,23 @@
                 <a class="dropdown-item" href="/user">Profile | 프로필</a>
                 <a class="dropdown-item" href="/appointment-list">Appointments | 내 수업</a>
                 <div class="dropdown-divider"></div>
+                <h2 class="dropdown-header">Account Settings</h2>
+                <a class="dropdown-item" href="/updateprofile">Update Profile | 프로필 변경</a>
+                <a class="dropdown-item" href="/resetpassword">Change Password | 비밀번호 변경</a>
                 <a class="dropdown-item" href="/logout">Logout | 로그아웃</a>
               </div>
             <% } else if (sessionModel.isUserAdmin()) { %>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/user">Profile | 프로필</a>
                 <a class="dropdown-item" href="/appointment-list">Appointments | 수업</a>
-                <a class="dropdown-item" href="/manualcreation">Manual Account Creation</a>
-                <div class="dropdown-divider"></div>  
+                <div class="dropdown-divider"></div>
+                <h3 class="dropdown-header">Administrator Tools</h3>
+                <a class="dropdown-item" href="/manualcreation">Create Student/Tutor Account</a>
+                <a class="dropdown-item" href="/newadmin">Create New Admin Account</a>
+                <div class="dropdown-divider"></div>
+                <h4 class="dropdown-header">Account Settings</h4>
+                <a class="dropdown-item" href="/updateprofile">Update Profile | 프로필 변경</a>  
+                <a class="dropdown-item" href="/resetpassword">Change Password | 비밀번호 변경</a>
                 <a class="dropdown-item" href="/logout">Logout | 로그아웃</a>
               </div>
             <% } %>
