@@ -12,11 +12,12 @@
     "dateformat": "latest",
     "ejs": "latest",
     "express": "latest",
+    "fs": "0.0.1-security",
     "uuid": "latest"
   },
   "scripts": {
     "start": "node app.js",
-    "archive": "zip mf-webapp.zip -r * .[^.]*",
+    "archive": "zip ma-webapp.zip -r * .[^.]*",
     "test": "mocha --recursive"
   },
   "devDependencies": {

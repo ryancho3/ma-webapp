@@ -3,12 +3,13 @@
 var AWS = require('aws-sdk');
 AWS.config.loadFromPath('./config/aws.json');
 
-var client = new AWS.DynamoDB();
+var client = new AWS.S3();
 
-function dynamodbClient() {
+function s3Client() {
     return client;
 }
 
 
+
 // EXPORTS
-module.exports.dynamodbClient = dynamodbClient;
+module.exports.s3Client = s3Client;
