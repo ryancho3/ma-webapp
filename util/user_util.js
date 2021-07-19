@@ -1,17 +1,42 @@
 
 // DEPENDENCY
-var mediaUtil = require('./media_util.js')
+var stringUtil = require('./string_util.js')
 
-function getFileExtension(path) {
-    var ext = null
-    if (path.includes('.jpg')) {
-        ext = '.jpg'
-    } else if (path.includes('.png')) {
-        ext = '.png'
-    }
+function newDynamodbItemFromInput(userInput) {
 
-    return ext;
+    var newUserId = stringUtil.generateUUIDString();
+    var emailLowercase = stringUtil.toLowercaseString(userInput.email);
+    var passwordSha256 = stringUtil.parseSha256String(userInput.password);
+
+    var dynamodbItem = {
+        'user_id': {'S': newUserId},
+        'user_type': {'S': userInput.type},
+        'email_lowercase': {'S': emailLowercase},
+        'password_sha256': {'S': passwordSha256},
+        'name': {'S': userInput.name},
+        'profile': {'S': userInput.profile}
+    };
+
+    return dynamodbItem;
 }
 
-module.exports.getFileExtension = getFileExtension;
+function mapDynamodbItemToUserItem(dynamodbItem) {
 
+    if (!dynamodbItem) {
+        return null;
+    }
+
+    var userItem = {
+        'user_id': dynamodbItem.user_id['S'],
+        'user_type': dynamodbItem.user_type['S'],
+        'email_lowercase': dynamodbItem.email_lowercase['S'],
+        'password_sha256': dynamodbItem.password_sha256['S'],
+        'name': dynamodbItem.name['S'],
+        'profile': dynamodbItem.profile['S'],
+    };
+
+    return userItem;
+}
+
+module.exports.newDynamodbItemFromInput = newDynamodbItemFromInput;
+module.exports.mapDynamodbItemToUserItem = mapDynamodbItemToUserItem;
