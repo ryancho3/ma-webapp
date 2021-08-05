@@ -26,6 +26,10 @@ function mapDynamodbItemToCurriculumObj(dynamodbItem) {
         'name': dynamodbItem.name['S'],
         'description': dynamodbItem.description['S'],
     };
+
+    if (dynamodbItem.hidden) {
+        curriculumObj['hidden'] = dynamodbItem.hidden['BOOL'];
+    }
     
     return curriculumObj;
 }

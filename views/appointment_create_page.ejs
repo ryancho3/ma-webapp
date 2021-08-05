@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <%- include('section/head_common') %>
+    <%- include('section/functions') %>
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Create Appointment - Matchbook Academy</title>
@@ -13,7 +14,8 @@
     <div class="container">
 
       <div id="page">
-        <h2>Create New Appointment</h2>
+        <h2>Create New Appointment | 수업 잡기</h2>
+        <br>
         <form action="/appointment-create" method="post">
 
           <input type="hidden" name="curriculum_id" value="<%= curriculum_id %>"/>
@@ -21,35 +23,41 @@
           <input type="hidden" name="hour" value="<%= hour %>"/>
 
           <div class="form-group">
-            <label for="name">Name: <%= curriculum_info['name'] %> </label>
+            <label for="name">Curriculum | 과목: <a href="/curriculum-view?curriculum_id=<%= curriculum_id %>"><%= curriculum_info['name'] %></a></label>
           </div>
           <div class="form-group">
-            <label for="description">Description: <%= curriculum_info['description'] %></label>
+            <label for="description">Description | 설명: <%= curriculum_info['description'] %></label>
           </div>
           <div class="form-group">
-            <label for="description">Appointment Date: <%= appointment_date %></label>
+            <label for="description">Appointment Date | 수업 날짜: <%= parseDisplayStringFromYYYYMMDD(appointment_date) %></label>
           </div>
           <div class="form-group">
-            <label for="description">Appointment Time: <%= appointment_time %></label>
+            <label for="description">Appointment Time | 수업 시간: <%= appointment_time %></label>
           </div>
+          <br>
+          <div>
+            <label for="name">Mentor Profiles | 멘토 프로필 보기</label>
+            <ul>
+              <% tutor_user_list.forEach(function(user) { %>
+              <li><a href="/user?user_id=<%= user['user_id'] %>"><%= user['name'] %></a></li>
+              <% }) %>
+            </ul>
+          </div>
+          <label>Choose Mentor | 멘토 선택</label>
           <div class="form-group">
             <select name="tutor_user_id">
+              <option selected="true" disabled="disabled">Choose a Mentor | 멘토를 선택해 주세요</option>   
               <% tutor_user_list.forEach(function(user) { %>
               <option value="<%= user['user_id'] %>"><%= user['name'] %></option>
               <% }); %>
             </select>
           </div>
           <div class="form-submit">
-            <input type="submit" value="Create">
+            <input type="submit" value="Create | 수업 잡기">
           </div>
         </form>
-        <div>
-          <ul>
-            <% tutor_user_list.forEach(function(user) { %>
-            <li><a href="/user?user_id=<%= user['user_id'] %>"><%= user['name'] %></a></li>
-            <% }) %>
-          </ul>
-        </div>
+        
+        
       </div>
 
     </div>

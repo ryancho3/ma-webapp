@@ -67,7 +67,9 @@ CurriculumService.prototype.listCurriculum = function(callback) {
 
         data.Items.forEach(function(ddbItem){
             var curriculum_obj = curriculumUtil.mapDynamodbItemToCurriculumObj(ddbItem);
-            curriculumItems.push(curriculum_obj);
+            if (!curriculum_obj['hidden']) {
+                curriculumItems.push(curriculum_obj);
+            }
         });
 
         return callback(null, {
@@ -91,6 +93,27 @@ CurriculumService.prototype.removeCurriculum = function(input, callback) {
         return callback(err);
     });
 }
+
+CurriculumService.prototype.hideCurriculum = function(input, callback) {
+
+    var inputCurriculumId = input['curriculumId'];
+
+    var ddbParams = {
+        'TableName': this.ddbTable,
+        'Key': {'curriculum_id': {'S': inputCurriculumId}},
+        'ExpressionAttributeNames': {'#Hidden' : 'hidden'},
+        'ExpressionAttributeValues': {':hidden': {'BOOL': true}},
+        'UpdateExpression': 'SET #Hidden = :hidden',  
+        'ReturnValues': 'ALL_NEW'
+        }
+    this.ddbClient.updateItem(ddbParams, function(err, data) {
+    return callback(err);
+    });
+}
+
+
+    
+
 
 // EXPORT
 var curriculumService = new CurriculumService();

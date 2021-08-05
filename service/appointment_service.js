@@ -201,7 +201,7 @@ AppointmentService.prototype.updateTutorNote = function (input, callback) {
     var ddbParams = {
         'TableName': this.ddbAppointmentTableName,
         'Key': {'appointment_id': {'S': inputAppointmentId}},
-        'ExpressionAttributeNames': {"#Note" : "note"},
+        'ExpressionAttributeNames': {'#Note' : 'note'},
         'ExpressionAttributeValues': {':note': {'S': inputNote}},
         'UpdateExpression': 'SET #Note = :note',  
         'ReturnValues': 'ALL_NEW'

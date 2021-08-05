@@ -15,14 +15,14 @@
       <div id="page">
         <h2><%= curriculumInfo['name'] %></h2>
         <div>
-            <strong>Description: </strong>
+            <strong>Description | 설명: </strong>
             <span><%= curriculumInfo['description'] %></span>
         </div>
         <div>
             <a href="/content/<%= curriculumId %>.pdf"><Strong>Curriculum Overview</Strong></a>
         </div>
         <div>
-          <strong>Availability (next 7 days)</strong>
+          <strong>Availability | 수업 가능 시간</strong>
         </div>
         <div>
           <% Object.keys(curriculumAvailability).forEach(function(yyyymmdd){ %>
