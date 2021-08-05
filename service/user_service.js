@@ -116,6 +116,7 @@ UserService.prototype.loadUserByEmail = function(input, callback) {
     this.ddbClient.query(ddbParams, function(err, data) {
 
         if (err) {
+            console.log(err);
             callback(err);
             return;
         }

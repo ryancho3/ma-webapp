@@ -196,18 +196,15 @@ AppointmentService.prototype.updateAdminNote = function (input, callback) {
 AppointmentService.prototype.updateTutorNote = function (input, callback) {
 
     var inputAppointmentId = input['appointmentId'];
-    var inputNote = input['note'];
-
+    var inputNote = String(input['note']);
+    console.log(inputAppointmentId);
     var ddbParams = {
-        TableName: this.ddbAppointmentTableName,
-        Key: {
-            'appointment_id': {S: inputAppointmentId}
-        },
-        UpdateExpression: 'SET tutor_note = :note',
-        ExpressionAttributeValues: {
-            ':note': {S: inputNote}
-        },
-        ReturnValues: 'ALL_NEW'
+        'TableName': this.ddbAppointmentTableName,
+        'Key': {'appointment_id': {'S': inputAppointmentId}},
+        'ExpressionAttributeNames': {"#Note" : "note"},
+        'ExpressionAttributeValues': {':note': {'S': inputNote}},
+        'UpdateExpression': 'SET #Note = :note',  
+        'ReturnValues': 'ALL_NEW'
     }
 
     this.ddbClient.updateItem(ddbParams, function(err, data) {

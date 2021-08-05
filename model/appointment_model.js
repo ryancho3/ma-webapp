@@ -109,6 +109,18 @@ AppointmentModel.prototype.getAdminNote = function() {
     return this.appointmentItem['adminNote'];
 }
 
+AppointmentModel.prototype.getTutorNote = function() {
+
+    if (!this.appointmentItem) {
+        return null;
+    }
+    return this.appointmentItem['tutorNote'];
+}
+
+AppointmentModel.prototype.setTutorNote = function(note) {
+    this.appointmentItem['tutorNote'] = note;
+}
+
 AppointmentModel.prototype.getAppointmentStartDateString = function() {
 
     if (!this.appointmentItem) {

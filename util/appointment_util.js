@@ -30,24 +30,24 @@ function mapDynamodbItemToAppointmentItem (dynamodbItem) {
     var tutorUserId = dynamodbItem.tutor_user_id.S;
     var studentUserId = dynamodbItem.student_user_id.S;
     var yyyymmddhh = dynamodbItem.yyyymmddhh.N;
-
     var appointmentItem = {
         'appointmentId': appointmentId,
         'curriculumId': curriculumId,
         'tutorUserId': tutorUserId,
         'studentUserId': studentUserId,
-        'yyyymmddhh': yyyymmddhh
+        'yyyymmddhh': yyyymmddhh,
     }
 
-    if (dynamodbItem.admin_note) {
+    /*if (dynamodbItem.admin_note) {
         appointmentItem['adminNote'] = dynamodbItem.admin_note.S;
+    }*/
+    if (dynamodbItem.note) {
+        appointmentItem['tutorNote'] = dynamodbItem.note.S;
     }
-    if (dynamodbItem.tutor_note) {
-        appointmentItem['tutorNote'] = dynamodbItem.tutor_note.S;
-    }
+    /*
     if (dynamodbItem.student_note) {
         appointmentItem['studentNote'] = dynamodbItem.student_note.S;
-    }
+    }*/
 
     return appointmentItem;
 }

@@ -18,7 +18,8 @@ module.exports = function(req, res) {
         'appointmentItem': {},
         'curriculumItem': {},
         'studentUserItem': {},
-        'tutorUserItem': {}
+        'tutorUserItem': {},
+        'tutorNote': {}
     };
 
     // Load appointment item
@@ -34,6 +35,7 @@ module.exports = function(req, res) {
 
         var appointmentItem = output['appointmentItem'];
         result['appointmentItem'] = appointmentItem;
+        console.log(appointmentItem);
 
         async.parallel([
 
@@ -95,7 +97,17 @@ module.exports = function(req, res) {
                     result['tutorUserItem'] = userItem; 
                     return done();
                 });
+            },
+
+            function loadNote(done) {
+
+                var appointmentItem = result['appointmentItem'];
+                var note = appointmentItem['tutorNote'];
+                console.log(note);
+                result['tutorNote'] = note;
+                return done();
             }
+
 
         ], function(err) {
 
@@ -110,13 +122,15 @@ module.exports = function(req, res) {
             var curriculumItem = result['curriculumItem'];
             var tutorUserItem = result['tutorUserItem'];
             var studentUserItem = result['studentUserItem'];
+            var tutorNote = result['tutorNote'];
 
             var appointmentModel = new AppointmentModel();
             appointmentModel.setAppointmentItem(appointmentItem);
             appointmentModel.setCurriculumItem(curriculumItem);
             appointmentModel.setTutorUserItem(tutorUserItem);
             appointmentModel.setStudentUserItem(studentUserItem);
-
+            appointmentModel.setTutorNote(tutorNote);
+            console.log(appointmentModel.getTutorNote());
             return res.render('appointment_page', {
                 'sessionModel': req.sessionModel,
                 'appointmentId': inputAppointmentId,

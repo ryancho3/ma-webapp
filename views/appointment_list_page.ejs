@@ -30,28 +30,12 @@
         <% appointmentModels.forEach(function(appointmentModel) { %>
 
           <ul>
-            <li><a href="/appointment-view?appointment_id=<%= appointmentModel.getAppointmentId() %>"><%= appointmentModel.getAppointmentId() %></a></li>
-            <li>Curriculum: <a href="/curriculum-view?curriculum_id=<%= appointmentModel.getCurriculumId() %>"><%= appointmentModel.getCurriculumName() %></a></li>
-            <li>When: <%= appointmentModel.getAppointmentStartDateString() %> <%= appointmentModel.getAppointmentStartTimeString() %></li>
-            <li>Tutor: <a href="/user?user_id=<%= appointmentModel.getTutorUserId() %>"><%= appointmentModel.getTutorUserName() %> (<%= appointmentModel.getTutorUserEmail() %>)</a></li>
-            <li>Student: <a href="/user?user_id=<%= appointmentModel.getStudentUserId() %>"><%= appointmentModel.getStudentUserName() %> (<%= appointmentModel.getStudentUserEmail() %>)</a></li>
-            <li>Note: <%= appointmentModel.getAdminNote() %></li>
-            <li>
-              Actions: 
-              <form action="/appointment-archive" method="post">
-                <input type="hidden" name="appointment_id" value="<%= appointmentModel.getAppointmentId() %>"/>
-                <% if (sessionModel.isUserAdmin()) { %>
-                  <input type="hidden" name="note" value="admin archive"/>
-                  <input type="submit" value="Archive"/>
-                <% } else if (sessionModel.isUserTutor()) { %>
-                  <input type="hidden" name="note" value="tutor cancel"/>
-                  <input type="submit" value="Cancel"/>
-                <% } else if (sessionModel.isUserStudent()) { %>
-                  <input type="hidden" name="note" value="student cancel"/>
-                  <input type="submit" value="Cancel"/>
-                <% } %>
-              </form>
-            </li>
+            <li><a href="/appointment-view?appointment_id=<%= appointmentModel.getAppointmentId() %>">Details | 자세히 보기 (Click)</a></li>
+            <li>Curriculum | 과목: <a href="/curriculum-view?curriculum_id=<%= appointmentModel.getCurriculumId() %>"><%= appointmentModel.getCurriculumName() %></a></li>
+            <li>When | 수업시간: <%= appointmentModel.getAppointmentStartDateString() %> <%= appointmentModel.getAppointmentStartTimeString() %></li>
+            <li>Mentor | 멘토: <a href="/user?user_id=<%= appointmentModel.getTutorUserId() %>"><%= appointmentModel.getTutorUserName() %> (<%= appointmentModel.getTutorUserEmail() %>)</a></li>
+            <li>Student | 학생: <a href="/user?user_id=<%= appointmentModel.getStudentUserId() %>"><%= appointmentModel.getStudentUserName() %> (<%= appointmentModel.getStudentUserEmail() %>)</a></li>
+            <li>Link to Lesson | 수업 링크: <a href="<%= appointmentModel.getTutorNote() %>"></a></li>
           </ul>
         <% }) %>
       </div>

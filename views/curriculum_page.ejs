@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <%- include('section/head_common') %>
+    <%- include('section/functions') %>
     <meta name="description" content="">
     <meta name="author" content="">
     <title><%= curriculumInfo['name'] %> - Matchbook Academy</title>
@@ -25,11 +26,11 @@
         </div>
         <div>
           <% Object.keys(curriculumAvailability).forEach(function(yyyymmdd){ %>
-              <span><%= yyyymmdd %> </span>
+              <span><%= parseDisplayStringFromYYYYMMDD(yyyymmdd) %> </span>
               <% var hourList = curriculumAvailability[yyyymmdd]; %>
             <ul>
               <% hourList.forEach(function(hour) { %>
-                <li><a href="/appointment-create?curriculumId=<%= curriculumId %>&yyyymmdd=<%= yyyymmdd %>&hour=<%= hour %>"><%= yyyymmdd %> <%= hour %>:00</a></li>
+                <li><a href="/appointment-create?curriculumId=<%= curriculumId %>&yyyymmdd=<%= yyyymmdd %>&hour=<%= hour %>"><%= parseDisplayStringFromYYYYMMDD(yyyymmdd) %> <%= hour %>:00</a></li>
               <% }) %>
             </ul>
           <%

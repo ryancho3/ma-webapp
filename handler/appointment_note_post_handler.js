@@ -3,10 +3,10 @@
 var appointmentService = require('../service/appointment_service.js');
 
 module.exports = function(req, res) {
-
+    console.log('trigger');
     var sessionModel = req.sessionModel;
     var sessionUserType = sessionModel.getUserType();
-
+    console.log('trigger');
     // TODO: check permission
 
     var input = {};
@@ -27,7 +27,7 @@ module.exports = function(req, res) {
         });
 
     } else if (sessionUserType == 'TUTOR') {
-
+        console.log('trigger');
         appointmentService.updateTutorNote(input, function(err, output) {
 
             if (err) {

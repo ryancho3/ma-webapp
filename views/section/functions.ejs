@@ -1,0 +1,14 @@
+<%
+parseDisplayStringFromYYYYMMDD = function(yyyymmdd) {
+    if (!yyyymmdd) {
+        return null;
+    }
+    var yyyymmddString = "" + yyyymmdd; // force it to be string (in case it's a number)
+
+    var stringYYYY = yyyymmddString.substring(0, 4);
+    var stringMM = yyyymmddString.substring(4, 6);
+    var stringDD = yyyymmddString.substring(6, 8);
+
+    return (stringYYYY + "/" + stringMM + "/" + stringDD);
+}
+%>

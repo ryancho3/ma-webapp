@@ -15,10 +15,10 @@
 
     <div id="page">
       <h2>Availability list (start:<%= displayYYYYMMDD[0] %>, end:<%= displayYYYYMMDD[6] %>) </h2>
-      <div class="row">
+      <div class="row no-gutters">
 
         <% for (var j = 0; j < weekdaysYYYYMMDD.length; j++) { %>
-        <div class="col">
+        <div class="col-sm">
           <% var availableHourList = dateToAvailableHourListMap[weekdaysYYYYMMDD[j]];
              if (!availableHourList) {
               availableHourList = [];
@@ -26,7 +26,7 @@
           %>
 
 
-          <h3><%= displayYYYYMMDD[j] %></h3>
+          <h4><%= displayYYYYMMDD[j] %></h4>
 
           <form action="/tutor-availability-update-post" method="post">
             <input type="hidden" name="yyyymmdd" value="<%= weekdaysYYYYMMDD[j] %>" />
@@ -50,10 +50,21 @@
 
         <% } %>
       </div>
-
     </div>
   </div>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-4">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="/tutor-availability-list">This Week</a></li>
+            <li class="page-item"><a class="page-link" href="/tutor-availability-list/2">Next Week</a></li>
+            <li class="page-item"><a class="page-link" href="/tutor-availability-list/3">2 Weeks Later</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+  </div>
   <%- include('section/footer'); %>
 
   <!-- Static -->

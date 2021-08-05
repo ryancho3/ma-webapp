@@ -34,9 +34,27 @@ function verifyYYYYMMDD(yyyymmdd) {
     return intDate;
 }
 
+function getWeekStartDate(date) {
+    var weekStartDate = new Date();
+    var givenDate = new Date();
+    givenDate.setDate(date);
+    console.log(givenDate);
+    weekStartDate.setDate(givenDate.getDate() - givenDate.getDay());
+    return weekStartDate;
+}
+
+function getWeekEndDate(date) {
+    var weekEndDate = new Date();
+    var givenDate = new Date();
+    givenDate.setDate(date);
+    weekEndDate.setDate(givenDate.getDate() - givenDate.getDay() + 7);
+    return weekEndDate;
+}
+
 module.exports.verifyYYYYMMDD = verifyYYYYMMDD;
 module.exports.getDaysInMonth = getDaysInMonth;
-
+module.exports.getWeekStartDate = getWeekStartDate;
+module.exports.getWeekEndDate = getWeekEndDate;
 
 
 
