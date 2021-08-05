@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
     <%- include('section/head_common') %>
     <meta name="description" content="">
     <meta name="author" content="">
@@ -10,25 +11,56 @@
   <body>
 
     <%- include('section/header'); %>
+    
+    <img class="img" src="/images/banner.png" align="center" style="height: 300px;">
 
-    <div class="container">
-        <div id="page">
-          <h1>Welcome! 환영합니다!</h1>
+    <div style="font-size: 20px; margin: 0 auto; max-width: 65em; margin-top: 70px;">
+      <!-- <div class="container-fluid" align="center">
+        <h1 style="font-size: 100px; margin-top: 30px;"><b><i>Welcome!</i></b></h1>
+        <br>
+      </div> -->
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-5">
+            <img class="img-thumbnail" src="/images/cathy.jpg" style="width: 100%;" align="right">
+             <!-- <figcaption>Cathy Cho</figcaption> -->
+          </div>
+
+          <div class="col-md-7">
+            <p>
+              <b style="font-size: 30px;">Welcome!</b><br><br>
+              Welcome to Matchbook Academy, the online platform that connects students in need of educational assistance—mentees—with volunteer mentors.<br><br>
+
+              <body>If you are not yet a registered mentee/mentor or simply want to learn more about us, visit </body>
+              <a href="https://www.matchbookfoundation.org/">our foundation website.</a><br><br>
+
+              <b>How is this website different from the matchbookfoundation.org website?</b><br>
+
+              @Henry add response? <br><br>
+            </p>
+          </div>  
         </div>
-    </div>
+      </div>
 
-    <div class="container">
-      <div id="page">
-        <body>Welcome to Matchbook Academy, the online platform connecting students in need of educational assistance with volunteer tutors.</body>
-        </br>
-        <body>Matchbook Academy는 사회적으로 어려운 아이들과 이들을 돕고싶은 사람들을 연결해 주는 플렛폼입니다.</body>
-        </br>
-        </br>
-        <body>To learn more about us, visit </body>
-        <a href="https://www.matchbookfoundation.org/">our foundation website.</a>
+      <hr style="margin-top: 60px;">
+
+      <div class="container-fluid">
+        <b style="font-size: 100px;">Our mission.</b> <br><br>
+        The COVID-19 pandemic has disproportionately affected many families by limiting room for an equitable learning environment. To tackle this challenge, we have created Matchbook Foundation, a non-profit organization for young students from affected families to connect with dedicated teachers from all over the world. Classes will be free, one-on-one or in groups (if requested), and held online.
+      </div>
+
+      <hr style="margin-top: 60px;">
+
+      <div class="container-fluid" align="right">
+        <b style="font-size: 100px;">How it works.</b> <br><br>
+        We offer tutors in many courses, including math, sciences, languages, and music. Students can choose to receive help with a subject that they are currently learning in school (currently available for only math related topics) or with a supplementary subject to advance their knowledge. Students who choose the latter option will be instructed based on the course syllabus, specially planned by our Curriculum Managers. Each course is term contained: 12 classes, once per week. <br><br>
+
+        After applying to be a mentee/mentor on the matchbookfoundation.org website, you will receive an email from our team notifying you of your login details for the matchbook.academy website if your application is approved. 
       </div>
     </div>
 
+    <div class="bg-cover" align="center" style="background: url(/images/teaching.jpg); height: 400px; margin-top: 80px;"></div>
 
     <%- include('section/footer'); %>
 

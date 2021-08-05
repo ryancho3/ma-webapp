@@ -77,6 +77,7 @@ if (cluster.isMaster) {
     app.set('views', __dirname + '/views');
     app.use('/static', express.static('static'))
     app.use('/content', express.static(path.join(__dirname, './content')));
+    app.use('/images', express.static(path.join(__dirname, './images')));
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended:false}));
     app.use(httpsRedirectMiddleware);
