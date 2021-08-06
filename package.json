@@ -1,6 +1,6 @@
 {
   "name": "mf-webapp",
-  "version": "1.0.2.2",
+  "version": "0.0.0",
   "private": true,
   "dependencies": {
     "async": "latest",
