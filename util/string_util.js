@@ -139,7 +139,23 @@ function parseYYYYMMDDHHStringFromYYYYMMDDAndHour(yyyymmdd, hour) {
     return stringYYYYMMDD + "" + stringHH;
 }
 
+function parseYYYYMMDDStringFromYYYYMMDDHH(yyyymmddhh) {
+    if(!yyyymmddhh) {
+        return null;
+    }
+    var stringYYYYMMDDHH = "" + yyyymmddhh;
+    var stringYYYYMMDD = stringYYYYMMDDHH.substring(0,8);
+    return stringYYYYMMDD;
+}
 
+function parseHHStringFromYYYYMMDDHH(yyyymmddhh) {
+    if(!yyyymmddhh) {
+        return null;
+    }
+    var stringYYYYMMDDHH = "" + yyyymmddhh;
+    var stringHH = stringYYYYMMDDHH.substring(8,10);
+    return stringHH;
+}
 
 // EXPORTS
 module.exports.generateUUIDString = generateUUIDString;
@@ -152,3 +168,5 @@ module.exports.parseYYYYMMDDHHStringFromYYYYMMDDAndHour = parseYYYYMMDDHHStringF
 module.exports.parseShortDayStringFromYYYYMMDD = parseShortDayStringFromYYYYMMDD;
 module.exports.parseFullDayStringFromYYYYMMDD = parseFullDayStringFromYYYYMMDD;
 module.exports.parseDisplayStringFromYYYYMMDD = parseDisplayStringFromYYYYMMDD;
+module.exports.parseYYYYMMDDStringFromYYYYMMDDHH = parseYYYYMMDDStringFromYYYYMMDDHH;
+module.exports.parseHHStringFromYYYYMMDDHH = parseHHStringFromYYYYMMDDHH;

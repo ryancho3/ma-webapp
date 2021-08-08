@@ -35,7 +35,6 @@ module.exports = function(req, res) {
 
         var appointmentItem = output['appointmentItem'];
         result['appointmentItem'] = appointmentItem;
-        console.log(appointmentItem);
 
         async.parallel([
 
@@ -103,7 +102,6 @@ module.exports = function(req, res) {
 
                 var appointmentItem = result['appointmentItem'];
                 var note = appointmentItem['tutorNote'];
-                console.log(note);
                 result['tutorNote'] = note;
                 return done();
             }
@@ -130,7 +128,6 @@ module.exports = function(req, res) {
             appointmentModel.setTutorUserItem(tutorUserItem);
             appointmentModel.setStudentUserItem(studentUserItem);
             appointmentModel.setTutorNote(tutorNote);
-            console.log(appointmentModel.getTutorNote());
             return res.render('appointment_page', {
                 'sessionModel': req.sessionModel,
                 'appointmentId': inputAppointmentId,

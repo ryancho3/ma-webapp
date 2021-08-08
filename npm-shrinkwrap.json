@@ -1,12 +1,12 @@
 {
   "name": "mf-webapp",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "mf-webapp",
-      "version": "0.0.1",
+      "version": "0.0.0",
       "dependencies": {
         "async": "latest",
         "aws-sdk": "^2.944.0",
@@ -18,6 +18,7 @@
         "ejs": "latest",
         "express": "latest",
         "fs": "0.0.1-security",
+        "nodemailer": "^6.6.3",
         "uuid": "latest"
       },
       "devDependencies": {
@@ -1441,6 +1442,14 @@
       "integrity": "sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==",
       "engines": {
         "node": ">= 0.6"
+      }
+    },
+    "node_modules/nodemailer": {
+      "version": "6.6.3",
+      "resolved": "https://registry.npmjs.org/nodemailer/-/nodemailer-6.6.3.tgz",
+      "integrity": "sha512-faZFufgTMrphYoDjvyVpbpJcYzwyFnbAMmQtj1lVBYAUSm3SOy2fIdd9+Mr4UxPosBa0JRw9bJoIwQn+nswiew==",
+      "engines": {
+        "node": ">=6.0.0"
       }
     },
     "node_modules/normalize-path": {
@@ -3438,6 +3447,11 @@
       "version": "0.6.2",
       "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-0.6.2.tgz",
       "integrity": "sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw=="
+    },
+    "nodemailer": {
+      "version": "6.6.3",
+      "resolved": "https://registry.npmjs.org/nodemailer/-/nodemailer-6.6.3.tgz",
+      "integrity": "sha512-faZFufgTMrphYoDjvyVpbpJcYzwyFnbAMmQtj1lVBYAUSm3SOy2fIdd9+Mr4UxPosBa0JRw9bJoIwQn+nswiew=="
     },
     "normalize-path": {
       "version": "3.0.0",

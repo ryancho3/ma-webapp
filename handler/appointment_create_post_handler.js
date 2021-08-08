@@ -1,6 +1,7 @@
 
 // DEPENDENCY
 var appointmentService = require('../service/appointment_service.js');
+var emailService = require('../service/email_service.js');
 
 module.exports = function(req, res) {
 
@@ -22,6 +23,9 @@ module.exports = function(req, res) {
         }
 
         var appointmentItem = output['appointmentItem'];
+
+        emailService.sendAppointmentEmailNotificationToTutor(appointmentItem);
+        emailService.sendAppointmentEmailNotificationToStudent(appointmentItem);
 
         res.render('appointment_create_success_page', {
             'sessionModel': req.sessionModel,

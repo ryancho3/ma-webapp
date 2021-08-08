@@ -52,6 +52,8 @@ function mapDynamodbItemToAppointmentItem (dynamodbItem) {
     return appointmentItem;
 }
 
+
+
 // EXPORTS
 module.exports.newDynamodbItemFromInput = newDynamodbItemFromInput;
 module.exports.mapDynamodbItemToAppointmentItem = mapDynamodbItemToAppointmentItem;

@@ -30,6 +30,7 @@ if (cluster.isMaster) {
     var express = require('express');
     var bodyParser = require('body-parser');
     var cookieParser = require('cookie-parser')
+    var nodemailer = require('nodemailer');
 
     var httpsRedirectMiddleware = require('./middleware/https_redirect_middleware.js');
     var sessionMiddleware = require('./middleware/session_middleware.js');
