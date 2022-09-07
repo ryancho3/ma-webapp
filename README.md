@@ -1,5 +1,8 @@
 # Matchbook Academy Web App
 
+Online Platform to bridge college/highschool student tutors with young children in need of supplementary education through Zoom lessons.
+
+
 ## Setup
 
 Setup development environment on your computer
